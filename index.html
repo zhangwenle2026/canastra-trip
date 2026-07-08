@@ -1,1515 +1,519 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <meta name="theme-color" content="#000000">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="description" content="Serra da Canastra Road Trip | 秘境公路之旅 Jul 9-12, 2026">
-    <link rel="manifest" href="data:application/json;base64,eyJuYW1lIjoiU2VycmEgZGEgQ2FuYXN0cmEiLCJzaG9ydF9uYW1lIjoiQ2FuYXN0cmEiLCJzdGFydF91cmwiOiIuIiwiZGlzcGxheSI6InN0YW5kYWxvbmUiLCJiYWNrZ3JvdW5kX2NvbG9yIjoiIzAwMDAwMCIsInRoZW1lX2NvbG9yIjoiIzAwMDAwMCJ9">
-    <title>Serra da Canastra — 秘境公路之旅</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Libre+Baskerville:ital,wght@0,400;1,400&family=Playfair+Display:wght@700;800;900&display=swap" rel="stylesheet">
-    <style>
-        *, *::before, *::after {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --black: #000;
-            --off-white: #FDFBF7;
-            --gold: #D4A853;
-            --gold-dim: rgba(212, 168, 83, 0.3);
-            --glass-bg: rgba(255,255,255,0.08);
-            --glass-border: rgba(255,255,255,0.15);
-            --glass-blur: blur(12px);
-        }
-
-        html {
-            scroll-behavior: smooth;
-            -webkit-overflow-scrolling: touch;
-        }
-
-        body {
-            background: var(--black);
-            color: var(--off-white);
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            line-height: 1.6;
-            overflow-x: hidden;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
-
-        /* Typography */
-        .title-display {
-            font-family: 'Playfair Display', serif;
-            font-weight: 900;
-            letter-spacing: -0.02em;
-            line-height: 1.0;
-        }
-
-        .subtitle-italic {
-            font-family: 'Libre Baskerville', serif;
-            font-style: italic;
-            font-weight: 400;
-            letter-spacing: 0.01em;
-        }
-
-        .label-text {
-            font-family: 'Inter', sans-serif;
-            font-weight: 500;
-            font-size: 10px;
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
-        }
-
-        /* Glass Button */
-        .glass-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 12px 24px;
-            background: var(--glass-bg);
-            backdrop-filter: var(--glass-blur);
-            -webkit-backdrop-filter: var(--glass-blur);
-            border: 1px solid var(--glass-border);
-            border-radius: 24px;
-            color: var(--off-white);
-            font-family: 'Inter', sans-serif;
-            font-size: 11px;
-            font-weight: 500;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-        }
-
-        .glass-btn:hover {
-            background: rgba(255,255,255,0.14);
-            border-color: var(--gold);
-            color: var(--gold);
-            transform: translateY(-1px);
-        }
-
-        /* Navigation */
-        .nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-            padding: 20px 40px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: all 0.4s ease;
-        }
-
-        .nav.scrolled {
-            background: rgba(0,0,0,0.85);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            padding: 14px 40px;
-        }
-
-        .nav-logo {
-            font-family: 'Playfair Display', serif;
-            font-weight: 800;
-            font-size: 18px;
-            color: var(--off-white);
-            text-decoration: none;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 32px;
-            list-style: none;
-        }
-
-        .nav-links a {
-            font-family: 'Inter', sans-serif;
-            font-size: 10px;
-            font-weight: 500;
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
-            color: rgba(253,251,247,0.7);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .nav-links a:hover {
-            color: var(--gold);
-        }
-
-        /* Side Navigation Dots */
-        .side-nav {
-            position: fixed;
-            right: 30px;
-            top: 50%;
-            transform: translateY(-50%);
-            z-index: 999;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        .side-nav-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: rgba(253,251,247,0.25);
-            border: 1px solid rgba(253,251,247,0.4);
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .side-nav-dot.active {
-            background: var(--gold);
-            border-color: var(--gold);
-            transform: scale(1.4);
-        }
-
-        /* Hero Section */
-        .hero {
-            position: relative;
-            height: 100vh;
-            min-height: 700px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-        }
-
-        .hero-bg {
-            position: absolute;
-            inset: 0;
-            background-image: url('https://images.unsplash.com/photo-1598887142487-3c854d51eabb?w=1920&q=80');
-            background-size: cover;
-            background-position: center;
-            transform: scale(1.05);
-            transition: transform 8s ease-out;
-        }
-
-        .hero:hover .hero-bg {
-            transform: scale(1.0);
-        }
-
-        .hero-overlay {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(
-                180deg,
-                rgba(0,0,0,0.3) 0%,
-                rgba(0,0,0,0.1) 30%,
-                rgba(0,0,0,0.2) 60%,
-                rgba(0,0,0,0.85) 100%
-            );
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 2;
-            text-align: center;
-            padding: 0 20px;
-            max-width: 900px;
-        }
-
-        .hero-eyebrow {
-            font-family: 'Inter', sans-serif;
-            font-size: 10px;
-            font-weight: 500;
-            letter-spacing: 0.25em;
-            text-transform: uppercase;
-            color: var(--gold);
-            margin-bottom: 24px;
-            opacity: 0;
-            animation: fadeUp 1s ease 0.3s forwards;
-        }
-
-        .hero-title {
-            font-size: clamp(56px, 10vw, 140px);
-            margin-bottom: 16px;
-            opacity: 0;
-            animation: fadeUp 1s ease 0.5s forwards;
-        }
-
-        .hero-title::after {
-            content: '';
-            display: block;
-            width: 60px;
-            height: 2px;
-            background: var(--gold);
-            margin: 20px auto 0;
-        }
-
-        .hero-subtitle {
-            font-size: clamp(14px, 2vw, 18px);
-            color: rgba(253,251,247,0.8);
-            margin-bottom: 40px;
-            opacity: 0;
-            animation: fadeUp 1s ease 0.7s forwards;
-        }
-
-        .hero-info-bar {
-            display: flex;
-            justify-content: center;
-            gap: 32px;
-            flex-wrap: wrap;
-            opacity: 0;
-            animation: fadeUp 1s ease 0.9s forwards;
-        }
-
-        .hero-info-item {
-            font-family: 'Inter', sans-serif;
-            font-size: 11px;
-            font-weight: 400;
-            letter-spacing: 0.06em;
-            color: rgba(253,251,247,0.7);
-        }
-
-        .hero-info-item span {
-            margin-right: 6px;
-        }
-
-        .hero-scroll {
-            position: absolute;
-            bottom: 40px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 2;
-            opacity: 0;
-            animation: fadeUp 1s ease 1.2s forwards;
-        }
-
-        .hero-scroll::after {
-            content: '';
-            display: block;
-            width: 1px;
-            height: 40px;
-            background: linear-gradient(to bottom, var(--gold), transparent);
-            margin: 8px auto 0;
-            animation: scrollPulse 2s ease-in-out infinite;
-        }
-
-        @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes scrollPulse {
-            0%, 100% { opacity: 0.4; }
-            50% { opacity: 1; }
-        }
-
-        /* Section Base */
-        .section {
-            position: relative;
-            padding: 120px 40px;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .section-full {
-            position: relative;
-            padding: 0;
-            width: 100%;
-        }
-
-        .section-label {
-            font-family: 'Inter', sans-serif;
-            font-size: 9px;
-            font-weight: 600;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            color: var(--gold);
-            margin-bottom: 16px;
-        }
-
-        .section-title {
-            font-family: 'Playfair Display', serif;
-            font-weight: 800;
-            font-size: clamp(36px, 5vw, 64px);
-            line-height: 1.1;
-            margin-bottom: 24px;
-        }
-
-        .section-subtitle {
-            font-family: 'Libre Baskerville', serif;
-            font-style: italic;
-            font-size: 14px;
-            color: rgba(253,251,247,0.6);
-            max-width: 600px;
-            line-height: 1.8;
-        }
-
-        /* Timeline / Itinerary */
-        .itinerary {
-            padding: 100px 40px 120px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .itinerary-header {
-            text-align: center;
-            margin-bottom: 80px;
-        }
-
-        .timeline {
-            position: relative;
-            padding-left: 60px;
-        }
-
-        .timeline::before {
-            content: '';
-            position: absolute;
-            left: 20px;
-            top: 0;
-            bottom: 0;
-            width: 1px;
-            background: linear-gradient(to bottom, var(--gold), rgba(253,251,247,0.1), var(--gold));
-        }
-
-        .day-card {
-            position: relative;
-            margin-bottom: 80px;
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s ease;
-        }
-
-        .day-card.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .day-card::before {
-            content: '';
-            position: absolute;
-            left: -48px;
-            top: 8px;
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background: var(--gold);
-            box-shadow: 0 0 12px var(--gold-dim);
-        }
-
-        .day-number {
-            font-family: 'Playfair Display', serif;
-            font-weight: 900;
-            font-size: 12px;
-            color: var(--gold);
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            margin-bottom: 8px;
-        }
-
-        .day-title {
-            font-family: 'Playfair Display', serif;
-            font-weight: 800;
-            font-size: clamp(24px, 4vw, 40px);
-            margin-bottom: 8px;
-            line-height: 1.2;
-        }
-
-        .day-route {
-            font-family: 'Libre Baskerville', serif;
-            font-style: italic;
-            font-size: 13px;
-            color: rgba(253,251,247,0.5);
-            margin-bottom: 20px;
-        }
-
-        .day-details {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 16px;
-            margin-bottom: 20px;
-        }
-
-        .day-stat {
-            background: var(--glass-bg);
-            backdrop-filter: var(--glass-blur);
-            -webkit-backdrop-filter: var(--glass-blur);
-            border: 1px solid var(--glass-border);
-            border-radius: 16px;
-            padding: 16px 20px;
-        }
-
-        .day-stat-label {
-            font-size: 9px;
-            font-weight: 600;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            color: rgba(253,251,247,0.5);
-            margin-bottom: 4px;
-        }
-
-        .day-stat-value {
-            font-family: 'Playfair Display', serif;
-            font-weight: 700;
-            font-size: 18px;
-        }
-
-        .day-highlights {
-            list-style: none;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
-
-        .day-highlights li {
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            border-radius: 20px;
-            padding: 6px 14px;
-            font-size: 11px;
-            font-weight: 400;
-            color: rgba(253,251,247,0.8);
-            transition: all 0.3s ease;
-        }
-
-        .day-highlights li:hover {
-            border-color: var(--gold);
-            color: var(--gold);
-        }
-
-        .day-hotel {
-            margin-top: 16px;
-            padding: 16px 20px;
-            background: rgba(212,168,83,0.05);
-            border: 1px solid rgba(212,168,83,0.2);
-            border-radius: 12px;
-            font-size: 12px;
-            color: rgba(253,251,247,0.7);
-        }
-
-        .day-hotel strong {
-            color: var(--gold);
-            font-weight: 500;
-        }
-
-        /* Magazine Spread Sections */
-        .spread {
-            position: relative;
-            min-height: 100vh;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            overflow: hidden;
-        }
-
-        .spread-image {
-            position: relative;
-            overflow: hidden;
-        }
-
-        .spread-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.8s ease;
-        }
-
-        .spread:hover .spread-image img {
-            transform: scale(1.03);
-        }
-
-        .spread-content {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            padding: 80px 60px;
-            position: relative;
-        }
-
-        .spread-content::before {
-            content: '';
-            position: absolute;
-            top: 15%;
-            left: 0;
-            width: 1px;
-            height: 70%;
-            background: linear-gradient(to bottom, transparent, var(--gold-dim), transparent);
-        }
-
-        .spread-number {
-            font-family: 'Playfair Display', serif;
-            font-weight: 900;
-            font-size: 120px;
-            color: rgba(253,251,247,0.04);
-            position: absolute;
-            top: 40px;
-            right: 60px;
-            line-height: 1;
-        }
-
-        .spread-body {
-            font-family: 'Inter', sans-serif;
-            font-size: 13px;
-            font-weight: 300;
-            line-height: 2;
-            color: rgba(253,251,247,0.75);
-            margin-top: 24px;
-            max-width: 480px;
-        }
-
-        .spread-quote {
-            font-family: 'Libre Baskerville', serif;
-            font-style: italic;
-            font-size: 16px;
-            line-height: 1.8;
-            color: rgba(253,251,247,0.9);
-            margin-top: 32px;
-            padding-left: 20px;
-            border-left: 2px solid var(--gold);
-        }
-
-        /* Full Width Image Section */
-        .full-image-section {
-            position: relative;
-            height: 70vh;
-            min-height: 500px;
-            overflow: hidden;
-        }
-
-        .full-image-section img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .full-image-overlay {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 50%);
-            display: flex;
-            align-items: flex-end;
-            padding: 60px;
-        }
-
-        .full-image-caption {
-            max-width: 600px;
-        }
-
-        .full-image-caption h3 {
-            font-family: 'Playfair Display', serif;
-            font-weight: 800;
-            font-size: clamp(28px, 4vw, 48px);
-            margin-bottom: 12px;
-        }
-
-        .full-image-caption p {
-            font-family: 'Libre Baskerville', serif;
-            font-style: italic;
-            font-size: 13px;
-            color: rgba(253,251,247,0.7);
-            line-height: 1.8;
-        }
-
-        /* 3D Card Grid */
-        .card-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 24px;
-            padding: 80px 40px;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .tilt-card {
-            position: relative;
-            border-radius: 20px;
-            overflow: hidden;
-            aspect-ratio: 4/5;
-            cursor: pointer;
-            transform-style: preserve-3d;
-            transition: transform 0.4s ease;
-        }
-
-        .tilt-card:hover {
-            transform: perspective(800px) rotateY(-3deg) rotateX(2deg) scale(1.02);
-        }
-
-        .tilt-card img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.6s ease;
-        }
-
-        .tilt-card:hover img {
-            transform: scale(1.08);
-        }
-
-        .tilt-card-overlay {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.1) 50%, transparent 100%);
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-            padding: 28px;
-        }
-
-        .tilt-card-label {
-            font-size: 9px;
-            font-weight: 600;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            color: var(--gold);
-            margin-bottom: 8px;
-        }
-
-        .tilt-card-title {
-            font-family: 'Playfair Display', serif;
-            font-weight: 800;
-            font-size: 22px;
-            margin-bottom: 6px;
-        }
-
-        .tilt-card-desc {
-            font-size: 11px;
-            color: rgba(253,251,247,0.6);
-            line-height: 1.6;
-        }
-
-        /* Highlights Section */
-        .highlights {
-            padding: 100px 40px;
-            max-width: 1200px;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        .highlights-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 40px;
-            margin-top: 60px;
-        }
-
-        .highlight-item {
-            text-align: center;
-        }
-
-        .highlight-icon {
-            font-size: 32px;
-            margin-bottom: 16px;
-        }
-
-        .highlight-title {
-            font-family: 'Playfair Display', serif;
-            font-weight: 700;
-            font-size: 18px;
-            margin-bottom: 8px;
-        }
-
-        .highlight-desc {
-            font-size: 11px;
-            color: rgba(253,251,247,0.6);
-            line-height: 1.7;
-        }
-
-        /* Vehicle Section */
-        .vehicle-section {
-            position: relative;
-            padding: 120px 40px;
-            text-align: center;
-            overflow: hidden;
-        }
-
-        .vehicle-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 1px;
-            height: 80px;
-            background: linear-gradient(to bottom, transparent, var(--gold));
-        }
-
-        .vehicle-image {
-            max-width: 900px;
-            margin: 40px auto;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 40px 80px rgba(0,0,0,0.5);
-        }
-
-        .vehicle-image img {
-            width: 100%;
-            height: 400px;
-            object-fit: cover;
-        }
-
-        .vehicle-specs {
-            display: flex;
-            justify-content: center;
-            gap: 48px;
-            margin-top: 40px;
-            flex-wrap: wrap;
-        }
-
-        .vehicle-spec {
-            text-align: center;
-        }
-
-        .vehicle-spec-value {
-            font-family: 'Playfair Display', serif;
-            font-weight: 800;
-            font-size: 28px;
-            margin-bottom: 4px;
-        }
-
-        .vehicle-spec-label {
-            font-size: 9px;
-            font-weight: 500;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            color: rgba(253,251,247,0.5);
-        }
-
-        /* Accommodation */
-        .accommodation {
-            padding: 100px 40px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .accommodation-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 32px;
-            margin-top: 48px;
-        }
-
-        .accom-card {
-            position: relative;
-            border-radius: 20px;
-            overflow: hidden;
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            backdrop-filter: var(--glass-blur);
-            -webkit-backdrop-filter: var(--glass-blur);
-            transition: all 0.4s ease;
-        }
-
-        .accom-card:hover {
-            border-color: var(--gold-dim);
-            transform: translateY(-4px);
-        }
-
-        .accom-card-image {
-            height: 240px;
-            overflow: hidden;
-        }
-
-        .accom-card-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.6s ease;
-        }
-
-        .accom-card:hover .accom-card-image img {
-            transform: scale(1.05);
-        }
-
-        .accom-card-body {
-            padding: 24px;
-        }
-
-        .accom-card-nights {
-            font-size: 9px;
-            font-weight: 600;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            color: var(--gold);
-            margin-bottom: 8px;
-        }
-
-        .accom-card-name {
-            font-family: 'Playfair Display', serif;
-            font-weight: 700;
-            font-size: 20px;
-            margin-bottom: 8px;
-        }
-
-        .accom-card-desc {
-            font-size: 12px;
-            color: rgba(253,251,247,0.6);
-            line-height: 1.7;
-        }
-
-        /* Stay Section */
-        .stay-section {
-            padding: 100px 40px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 60px;
-        }
-
-        .stay-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 32px;
-        }
-
-        .stay-card {
-            position: relative;
-            border-radius: 20px;
-            overflow: hidden;
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            backdrop-filter: var(--glass-blur);
-            -webkit-backdrop-filter: var(--glass-blur);
-            transition: all 0.4s ease;
-        }
-
-        .stay-card:hover {
-            border-color: var(--gold-dim);
-            transform: translateY(-4px);
-        }
-
-        .stay-card-img {
-            height: 240px;
-            overflow: hidden;
-        }
-
-        .stay-card-img img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.6s ease;
-        }
-
-        .stay-card:hover .stay-card-img img {
-            transform: scale(1.05);
-        }
-
-        .stay-card-info {
-            padding: 24px;
-        }
-
-        .stay-card-info h4 {
-            font-family: 'Playfair Display', serif;
-            font-weight: 700;
-            font-size: 20px;
-            margin: 8px 0;
-        }
-
-        .stay-card-info p {
-            font-size: 12px;
-            color: rgba(253,251,247,0.7);
-            line-height: 1.6;
-        }
-
-        /* Highlights Section Override */
-        .highlights-section {
-            padding: 100px 40px;
-            max-width: 1200px;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        .footer-content {
-            padding: 20px;
-        }
-
-        /* Footer */
-        .footer {
-            padding: 80px 40px;
-            text-align: center;
-            border-top: 1px solid rgba(253,251,247,0.08);
-        }
-
-        .footer-title {
-            font-family: 'Playfair Display', serif;
-            font-weight: 800;
-            font-size: 32px;
-            margin-bottom: 12px;
-        }
-
-        .footer-subtitle {
-            font-family: 'Libre Baskerville', serif;
-            font-style: italic;
-            font-size: 13px;
-            color: rgba(253,251,247,0.5);
-            margin-bottom: 32px;
-        }
-
-        .footer-meta {
-            font-size: 10px;
-            color: rgba(253,251,247,0.3);
-            letter-spacing: 0.1em;
-        }
-
-        /* Divider */
-        .divider {
-            width: 60px;
-            height: 1px;
-            background: var(--gold);
-            margin: 0 auto;
-            opacity: 0.6;
-        }
-
-        /* Scroll Reveal */
-        .reveal {
-            opacity: 0;
-            transform: translateY(40px);
-            transition: all 0.9s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .reveal.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Mobile Responsive */
-        @media (max-width: 768px) {
-            .nav {
-                padding: 16px 20px;
-            }
-
-            .nav-links {
-                display: none;
-            }
-
-            .side-nav {
-                right: 16px;
-            }
-
-            .hero-content {
-                padding: 0 24px;
-            }
-
-            .hero-info-bar {
-                gap: 16px;
-            }
-
-            .itinerary {
-                padding: 60px 20px 80px;
-            }
-
-            .timeline {
-                padding-left: 40px;
-            }
-
-            .timeline::before {
-                left: 12px;
-            }
-
-            .day-card::before {
-                left: -34px;
-            }
-
-            .day-details {
-                grid-template-columns: 1fr;
-            }
-
-            .spread {
-                grid-template-columns: 1fr;
-                min-height: auto;
-            }
-
-            .spread-image {
-                height: 50vh;
-            }
-
-            .spread-content {
-                padding: 40px 24px;
-            }
-
-            .spread-content::before {
-                display: none;
-            }
-
-            .spread-number {
-                font-size: 80px;
-                top: 20px;
-                right: 24px;
-            }
-
-            .card-grid {
-                grid-template-columns: 1fr;
-                padding: 40px 20px;
-            }
-
-            .full-image-overlay {
-                padding: 30px 24px;
-            }
-
-            .accommodation-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .stay-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .vehicle-specs {
-                gap: 24px;
-            }
-
-            .section {
-                padding: 80px 24px;
-            }
-
-            .highlights-grid {
-                grid-template-columns: 1fr 1fr;
-                gap: 24px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .hero-title {
-                font-size: 48px;
-            }
-
-            .highlights-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Lazy loading placeholder */
-        img[data-src] {
-            background: rgba(253,251,247,0.03);
-        }
-
-        /* Smooth section transitions */
-        .section-divider {
-            height: 1px;
-            background: linear-gradient(to right, transparent, rgba(253,251,247,0.08), transparent);
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#000000">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Serra da Canastra - Road Trip</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Libre+Baskerville:ital,wght@0,400;1,400&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--black:#000;--white:#FDFBF7;--gold:#D4A853;--glass-bg:rgba(255,255,255,0.08);--glass-border:rgba(255,255,255,0.15);--font-display:'Playfair Display',serif;--font-serif:'Libre Baskerville',serif;--font-body:'Inter',sans-serif}
+html{scroll-behavior:smooth;font-size:16px}
+body{background:var(--black);color:var(--white);font-family:var(--font-body);font-weight:300;line-height:1.7;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+
+.welcome{position:relative;width:100%;height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden}
+.welcome__bg{position:absolute;inset:0;background:url('https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Serra_da_Canastra_MG.jpg/1920px-Serra_da_Canastra_MG.jpg') center/cover no-repeat;filter:brightness(0.4);z-index:0}
+.welcome__content{position:relative;z-index:1;text-align:center;padding:2rem}
+.welcome__title{font-family:var(--font-display);font-weight:900;font-size:clamp(3rem,8vw,6rem);letter-spacing:-0.02em;line-height:1.1;margin-bottom:1rem}
+.welcome__subtitle{font-family:var(--font-serif);font-style:italic;font-size:clamp(1rem,2.5vw,1.4rem);color:rgba(253,251,247,0.8);margin-bottom:1.5rem}
+.welcome__info{font-family:var(--font-body);font-weight:500;font-size:0.75rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:3rem}
+.welcome__btn{display:inline-block;padding:1rem 3rem;background:var(--glass-bg);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid var(--glass-border);border-radius:4px;font-family:var(--font-body);font-weight:500;font-size:0.8rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--white);cursor:pointer;transition:all 0.3s ease}
+.welcome__btn:hover{background:rgba(212,168,83,0.15);border-color:var(--gold);color:var(--gold)}
+
+.chapter-header{text-align:center;padding:6rem 2rem 3rem}
+.chapter-header__number{font-family:var(--font-body);font-weight:300;font-size:0.75rem;letter-spacing:0.3em;color:var(--gold);margin-bottom:0.5rem}
+.chapter-header__label{font-family:var(--font-body);font-weight:500;font-size:0.65rem;letter-spacing:0.4em;text-transform:uppercase;color:rgba(253,251,247,0.4);margin-bottom:1rem}
+.chapter-header__title{font-family:var(--font-display);font-weight:900;font-size:clamp(2rem,5vw,3.5rem);letter-spacing:-0.01em}
+
+.section{max-width:1100px;margin:0 auto;padding:0 2rem 6rem}
+.divider{width:60px;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:3rem auto}
+
+.route-line{text-align:center;font-family:var(--font-serif);font-style:italic;font-size:clamp(0.9rem,2vw,1.15rem);color:rgba(253,251,247,0.7);margin-bottom:2.5rem;line-height:1.8}
+.stats-bar{display:flex;justify-content:center;gap:2.5rem;flex-wrap:wrap;margin-bottom:3rem;padding:1.5rem;border-top:1px solid rgba(212,168,83,0.2);border-bottom:1px solid rgba(212,168,83,0.2)}
+.stat-item{text-align:center}
+.stat-item__value{font-family:var(--font-display);font-weight:700;font-size:1.5rem}
+.stat-item__label{font-size:0.7rem;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:rgba(253,251,247,0.5);margin-top:0.25rem}
+
+.tabs{margin-bottom:2.5rem}
+.tabs__nav{display:flex;gap:0;border-bottom:1px solid rgba(255,255,255,0.1);overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.tabs__nav::-webkit-scrollbar{display:none}
+.tabs__btn{flex:1;min-width:100px;padding:1rem 1.5rem;background:none;border:none;border-bottom:2px solid transparent;font-family:var(--font-body);font-weight:500;font-size:0.8rem;letter-spacing:0.1em;text-transform:uppercase;color:rgba(253,251,247,0.4);cursor:pointer;transition:all 0.3s ease;white-space:nowrap}
+.tabs__btn:hover{color:rgba(253,251,247,0.7)}
+.tabs__btn.active{color:var(--gold);border-bottom-color:var(--gold)}
+.tabs__panel{display:none;animation:fadeIn 0.4s ease}
+.tabs__panel.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+
+.day-header{margin-bottom:2rem;padding-bottom:1rem;border-bottom:1px solid rgba(255,255,255,0.06)}
+.day-header__date{font-size:0.7rem;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:0.5rem}
+.day-header__title{font-family:var(--font-display);font-weight:700;font-size:1.5rem}
+
+.timeline{position:relative;padding-left:2rem}
+.timeline::before{content:'';position:absolute;left:0;top:0.5rem;bottom:0.5rem;width:1px;background:linear-gradient(180deg,var(--gold),rgba(212,168,83,0.1))}
+.timeline__item{position:relative;padding-bottom:2rem}
+.timeline__item:last-child{padding-bottom:0}
+.timeline__item::before{content:'';position:absolute;left:-2rem;top:0.5rem;width:7px;height:7px;border-radius:50%;background:var(--gold);transform:translateX(-3px)}
+.timeline__time{font-family:var(--font-body);font-weight:600;font-size:0.8rem;color:var(--gold);margin-bottom:0.25rem}
+.timeline__title{font-family:var(--font-body);font-weight:500;font-size:1rem;margin-bottom:0.4rem}
+.timeline__desc{font-size:0.9rem;color:rgba(253,251,247,0.6);line-height:1.7}
+.timeline__tip{margin-top:1.5rem;padding:1rem 1.25rem;background:rgba(212,168,83,0.06);border-left:2px solid var(--gold);font-family:var(--font-serif);font-style:italic;font-size:0.85rem;color:rgba(253,251,247,0.7)}
+
+.spots-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:2rem}
+.spot-card{position:relative;overflow:hidden;border-radius:4px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);transition:transform 0.3s ease,border-color 0.3s ease}
+.spot-card:hover{transform:translateY(-4px);border-color:rgba(212,168,83,0.3)}
+.spot-card__img{width:100%;height:200px;object-fit:cover;filter:brightness(0.8);transition:filter 0.3s ease}
+.spot-card:hover .spot-card__img{filter:brightness(0.9)}
+.spot-card__body{padding:1.5rem}
+.spot-card__number{font-family:var(--font-body);font-weight:300;font-size:0.7rem;letter-spacing:0.2em;color:var(--gold);margin-bottom:0.5rem}
+.spot-card__title{font-family:var(--font-display);font-weight:700;font-size:1.25rem;margin-bottom:0.75rem}
+.spot-card__desc{font-size:0.85rem;color:rgba(253,251,247,0.6);line-height:1.7}
+
+.info-block{margin-bottom:3rem}
+.info-block__title{font-family:var(--font-display);font-weight:700;font-size:1.25rem;margin-bottom:1rem;padding-bottom:0.5rem;border-bottom:1px solid rgba(212,168,83,0.2)}
+.info-block__content{font-size:0.9rem;color:rgba(253,251,247,0.7);line-height:1.8}
+.info-block__content p{margin-bottom:0.75rem}
+.info-list{list-style:none;padding:0}
+.info-list li{position:relative;padding-left:1.25rem;margin-bottom:0.6rem;font-size:0.9rem;color:rgba(253,251,247,0.7)}
+.info-list li::before{content:'';position:absolute;left:0;top:0.65rem;width:4px;height:4px;border-radius:50%;background:var(--gold)}
+
+.footer{text-align:center;padding:6rem 2rem;border-top:1px solid rgba(255,255,255,0.05)}
+.footer__farewell{font-family:var(--font-serif);font-style:italic;font-size:clamp(1.5rem,4vw,2.5rem);margin-bottom:1.5rem}
+.footer__quote{font-family:var(--font-serif);font-style:italic;font-size:0.9rem;color:rgba(253,251,247,0.5);max-width:500px;margin:0 auto 2rem}
+.footer__brand{font-family:var(--font-body);font-weight:500;font-size:0.65rem;letter-spacing:0.4em;text-transform:uppercase;color:rgba(253,251,247,0.3)}
+
+.reveal{opacity:0;transform:translateY(30px);transition:opacity 0.8s ease,transform 0.8s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+@media(max-width:768px){
+.stats-bar{gap:1.5rem}
+.spots-grid{grid-template-columns:1fr}
+.tabs__btn{min-width:80px;padding:0.75rem 1rem;font-size:0.7rem}
+.section{padding:0 1.25rem 4rem}
+.chapter-header{padding:4rem 1.25rem 2rem}
+}
+@media(max-width:480px){
+.welcome__title{font-size:2.5rem}
+.stats-bar{flex-direction:column;gap:1rem}
+}
+</style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="nav" id="mainNav">
-        <a href="#hero" class="nav-logo">Canastra</a>
-        <ul class="nav-links">
-            <li><a href="#itinerary">行程</a></li>
-            <li><a href="#spots">目的地</a></li>
-            <li><a href="#vehicle">座驾</a></li>
-            <li><a href="#stay">住宿</a></li>
-        </ul>
-    </nav>
 
-    <!-- Side Navigation Dots -->
-    <div class="side-nav" id="sideNav">
-        <div class="side-nav-dot active" data-section="hero"></div>
-        <div class="side-nav-dot" data-section="itinerary"></div>
-        <div class="side-nav-dot" data-section="spots"></div>
-        <div class="side-nav-dot" data-section="vehicle"></div>
-        <div class="side-nav-dot" data-section="stay"></div>
-    </div>
+<!-- WELCOME -->
+<section class="welcome" id="welcome">
+<div class="welcome__bg"></div>
+<div class="welcome__content">
+<h1 class="welcome__title">Serra da Canastra</h1>
+<p class="welcome__subtitle">秘境公路之旅 &middot; A Hidden Road Trip</p>
+<p class="welcome__info">Jul 9&ndash;12, 2026 &middot; 4 Days &middot; GWM H6</p>
+<a href="#overview" class="welcome__btn">Explore</a>
+</div>
+</section>
 
-    <!-- Hero Section -->
-    <section class="hero" id="hero">
-        <div class="hero-bg" aria-hidden="true"></div>
-        <div class="hero-overlay" aria-hidden="true"></div>
-        <div class="hero-content">
-            <p class="hero-eyebrow">Minas Gerais, Brazil · July 2026</p>
-            <h1 class="hero-title title-display">Serra da Canastra</h1>
-            <p class="hero-subtitle subtitle-italic">秘境公路之旅 &nbsp;|&nbsp; A Hidden Road Trip</p>
-            <div class="hero-info-bar">
-                <div class="hero-info-item"><span>🚙</span> GWM H6</div>
-                <div class="hero-info-item"><span>📅</span> 4天3夜</div>
-                <div class="hero-info-item"><span>🗓</span> Jul 9–12, 2026</div>
-                <div class="hero-info-item"><span>📍</span> 880km+</div>
-            </div>
-        </div>
-        <div class="hero-scroll">
-            <span class="label-text" style="color: rgba(253,251,247,0.5); font-size: 9px;">Scroll</span>
-        </div>
-    </section>
+<!-- CHAPTER 01 -->
+<section id="overview">
+<div class="chapter-header reveal">
+<p class="chapter-header__number">&mdash; 01 &mdash;</p>
+<p class="chapter-header__label">Chapter 01</p>
+<h2 class="chapter-header__title">行程总览</h2>
+</div>
+<div class="section">
+<p class="route-line reveal">S&atilde;o Paulo &rarr; S&atilde;o Jo&atilde;o B. do Gl&oacute;ria &rarr; Serra da Canastra &rarr; Delfin&oacute;polis &rarr; S&atilde;o Paulo</p>
+<div class="stats-bar reveal">
+<div class="stat-item"><div class="stat-item__value">880km</div><div class="stat-item__label">Total Distance</div></div>
+<div class="stat-item"><div class="stat-item__value">4D3N</div><div class="stat-item__label">Duration</div></div>
+<div class="stat-item"><div class="stat-item__value">GWM H6</div><div class="stat-item__label">Vehicle</div></div>
+<div class="stat-item"><div class="stat-item__value">Jul 9&ndash;12</div><div class="stat-item__label">Dates</div></div>
+</div>
+<div class="divider"></div>
 
-    <!-- Itinerary Section -->
-    <section class="itinerary" id="itinerary">
-        <div class="itinerary-header reveal">
-            <p class="section-label">Itinerary Overview</p>
-            <h2 class="section-title">四天三夜<br>公路行程</h2>
-            <p class="section-subtitle">从圣保罗出发，穿越巴西最壮丽的高原地带，探寻隐秘瀑布、手工奶酪农场与塞拉多荒野</p>
-        </div>
+<!-- TABS -->
+<div class="tabs reveal">
+<div class="tabs__nav" role="tablist">
+<button class="tabs__btn active" role="tab" data-tab="day1">Day 1</button>
+<button class="tabs__btn" role="tab" data-tab="day2">Day 2</button>
+<button class="tabs__btn" role="tab" data-tab="day3">Day 3</button>
+<button class="tabs__btn" role="tab" data-tab="day4">Day 4</button>
+</div>
 
-        <div class="timeline">
-            <!-- Day 1 -->
-            <div class="day-card">
-                <p class="day-number">Day 01 — Thursday</p>
-                <h3 class="day-title">启程 · 奔赴矿区</h3>
-                <p class="day-route">São Paulo → São João Batista do Glória</p>
-                <div class="day-details">
-                    <div class="day-stat">
-                        <p class="day-stat-label">Distance</p>
-                        <p class="day-stat-value">420 km</p>
-                    </div>
-                    <div class="day-stat">
-                        <p class="day-stat-label">Drive Time</p>
-                        <p class="day-stat-value">5.5–6h</p>
-                    </div>
-                </div>
-                <ul class="day-highlights">
-                    <li>高速公路午餐</li>
-                    <li>下午抵达小镇</li>
-                    <li>傍晚漫步感受矿区宁静</li>
-                    <li>当地晚餐</li>
-                </ul>
-                <div class="day-hotel">
-                    <strong>🏨 住宿：</strong>Casa Serra da Canastra
-                </div>
-            </div>
+<!-- DAY 1 -->
+<div class="tabs__panel active" id="day1" role="tabpanel">
+<div class="day-header">
+<p class="day-header__date">Jul 9, 2026 &middot; Thursday</p>
+<h3 class="day-header__title">S&atilde;o Paulo &rarr; S&atilde;o Jo&atilde;o Batista do Gl&oacute;ria</h3>
+</div>
+<div class="timeline">
+<div class="timeline__item">
+<p class="timeline__time">07:00</p>
+<p class="timeline__title">Departure from S&atilde;o Paulo</p>
+<p class="timeline__desc">420km ahead. Take BR-381 (Fern&atilde;o Dias) then MG-050 toward Passos. Early start to beat metropolitan traffic.</p>
+</div>
+<div class="timeline__item">
+<p class="timeline__time">12:00</p>
+<p class="timeline__title">Highway Lunch Stop</p>
+<p class="timeline__desc">Posto Graal or local restaurant near Ribeir&atilde;o Preto area. Stretch, refuel the car and yourself.</p>
+</div>
+<div class="timeline__item">
+<p class="timeline__time">15:00</p>
+<p class="timeline__title">Arrive S&atilde;o Jo&atilde;o Batista do Gl&oacute;ria</p>
+<p class="timeline__desc">Gateway to Serra da Canastra. A quiet Minas town of 7,000 souls at the edge of the national park.</p>
+</div>
+<div class="timeline__item">
+<p class="timeline__time">16:30</p>
+<p class="timeline__title">Check in at Casa Serra da Canastra</p>
+<p class="timeline__desc">Settle into the pousada. Mountain air, silence, and the slow rhythm of rural Minas Gerais.</p>
+</div>
+<div class="timeline__item">
+<p class="timeline__time">18:00</p>
+<p class="timeline__title">Evening Stroll</p>
+<p class="timeline__desc">Wander through the small town. Golden hour light paints the surrounding hills. Feel the tranquility.</p>
+</div>
+<div class="timeline__item">
+<p class="timeline__time">19:30</p>
+<p class="timeline__title">Dinner &mdash; Comida Mineira</p>
+<p class="timeline__desc">Feij&atilde;o tropeiro, lingui&ccedil;a artesanal, p&atilde;o de queijo, couve refogada. The authentic soul of Minas on a plate.</p>
+</div>
+<div class="timeline__tip">Fill up gas in town &mdash; no gas stations inside the national park boundaries.</div>
+</div>
+</div>
 
-            <!-- Day 2 -->
-            <div class="day-card">
-                <p class="day-number">Day 02 — Friday</p>
-                <h3 class="day-title">穿越卡纳斯特拉</h3>
-                <p class="day-route">São João Batista do Glória → Serra da Canastra → Delfinópolis</p>
-                <div class="day-details">
-                    <div class="day-stat">
-                        <p class="day-stat-label">Experience</p>
-                        <p class="day-stat-value">全天探索</p>
-                    </div>
-                    <div class="day-stat">
-                        <p class="day-stat-label">Highlights</p>
-                        <p class="day-stat-value">6+ 景点</p>
-                    </div>
-                </div>
-                <ul class="day-highlights">
-                    <li>Casca d'Anta 瀑布 (186m)</li>
-                    <li>卡纳斯特拉高原 Chapadão</li>
-                    <li>手工奶酪农场</li>
-                    <li>国家公园观景台</li>
-                    <li>砾石越野驾驶</li>
-                    <li>野生动物 (鬃狼·大食蚁兽)</li>
-                </ul>
-                <div class="day-hotel">
-                    <strong>🏨 住宿：</strong>Airbnb · São José da Barra 湖畔民宿
-                </div>
-            </div>
+<!-- DAY 2 -->
+<div class="tabs__panel" id="day2" role="tabpanel">
+<div class="day-header">
+<p class="day-header__date">Jul 10, 2026 &middot; Friday</p>
+<h3 class="day-header__title">Serra da Canastra National Park &rarr; Delfin&oacute;polis</h3>
+</div>
+<div class="timeline">
+<div class="timeline__item">
+<p class="timeline__time">06:30</p>
+<p class="timeline__title">Early Departure</p>
+<p class="timeline__desc">Best light for photography. Morning mist rises from the valleys creating ethereal scenes.</p>
+</div>
+<div class="timeline__item">
+<p class="timeline__time">07:30</p>
+<p class="timeline__title">Enter Serra da Canastra National Park</p>
+<p class="timeline__desc">R$36/person entry. 200,000 hectares of cerrado, grasslands, rocky plateaus. Source of the S&atilde;o Francisco River.</p>
+</div>
+<div class="timeline__item">
+<p class="timeline__time">08:30</p>
+<p class="timeline__title">Casca d'Anta Waterfall Viewpoint</p>
+<p class="timeline__desc">186m drop &mdash; the highest waterfall of the S&atilde;o Francisco River. An immense cascade plunging into the valley below.</p>
+</div>
+<div class="timeline__item">
+<p class="timeline__time">10:30</p>
+<p class="timeline__title">Drive Across Chapad&atilde;o da Canastra</p>
+<p class="timeline__desc">Gravel road at 1400m altitude. Vast cerrado landscape to the horizon. GWM H6 AWD handles it well.</p>
+</div>
+<div class="timeline__item">
+<p class="timeline__time">12:00</p>
+<p class="timeline__title">Canastra Cheese Farm + Lunch</p>
+<p class="timeline__desc">Queijo canastra tasting &mdash; aged 22 days to over a year. A 200-year artisanal tradition recognized by IPHAN.</p>
+</div>
+<div class="timeline__item">
+<p class="timeline__time">14:00</p>
+<p class="timeline__title">Wildlife Spotting</p>
+<p class="timeline__desc">Slow drive through the park. Maned wolves, giant anteaters, rheas, and the elusive puma inhabit these grasslands.</p>
+</div>
+<div class="timeline__item">
+<p class="timeline__time">16:00</p>
+<p class="timeline__title">Exit Park, Drive to Delfin&oacute;polis</p>
+<p class="timeline__desc">Landscape shifts from plateau cerrado to lake country near S&atilde;o Jos&eacute; da Barra.</p>
+</div>
+<div class="timeline__item">
+<p class="timeline__time">18:00</p>
+<p class="timeline__title">Check in Lakeside Airbnb</p>
+<p class="timeline__desc">House overlooking Furnas Reservoir. Watch the sunset paint the lake gold and amber.</p>
+</div>
+<div class="timeline__item">
+<p class="timeline__time">19:30</p>
+<p class="timeline__title">Lakeside Dinner</p>
+<p class="timeline__desc">Fresh fish, local cuisine, the sound of water. Furnas reservoir stretching to the horizon.</p>
+</div>
+<div class="timeline__tip">Carry snacks, water, and a full tank &mdash; no shops or services inside the park.</div>
+</div>
+</div>
 
-            <!-- Day 3 -->
-            <div class="day-card">
-                <p class="day-number">Day 03 — Saturday</p>
-                <h3 class="day-title">深入德尔菲诺波利斯</h3>
-                <p class="day-route">Delfinópolis 周边深度游</p>
-                <div class="day-details">
-                    <div class="day-stat">
-                        <p class="day-stat-label">Pace</p>
-                        <p class="day-stat-value">慢旅行</p>
-                    </div>
-                    <div class="day-stat">
-                        <p class="day-stat-label">Vibe</p>
-                        <p class="day-stat-value">自然沉浸</p>
-                    </div>
-                </div>
-                <ul class="day-highlights">
-                    <li>Complexo do Claro 瀑布群</li>
-                    <li>Vale da Gurita</li>
-                    <li>Praia da Gurita</li>
-                    <li>咖啡种植园</li>
-                    <li>湖畔日落</li>
-                    <li>乡间小路驾驶</li>
-                </ul>
-                <div class="day-hotel">
-                    <strong>🏨 住宿：</strong>Airbnb · São José da Barra (第二晚)
-                </div>
-            </div>
+<!-- DAY 3 -->
+<div class="tabs__panel" id="day3" role="tabpanel">
+<div class="day-header">
+<p class="day-header__date">Jul 11, 2026 &middot; Saturday</p>
+<h3 class="day-header__title">Explore Delfin&oacute;polis</h3>
+</div>
+<div class="timeline">
+<div class="timeline__item">
+<p class="timeline__time">08:30</p>
+<p class="timeline__title">Relaxed Breakfast</p>
+<p class="timeline__desc">No rush. Coffee with a lake view, fresh fruit, p&atilde;o de queijo. Let the morning unfold slowly.</p>
+</div>
+<div class="timeline__item">
+<p class="timeline__time">10:00</p>
+<p class="timeline__title">Complexo do Claro</p>
+<p class="timeline__desc">Multiple cascades and natural pools carved into red sandstone. Crystal-clear water perfect for swimming.</p>
+</div>
+<div class="timeline__item">
+<p class="timeline__time">13:00</p>
+<p class="timeline__title">Lunch in Delfin&oacute;polis</p>
+<p class="timeline__desc">Charming small town with good restaurants. Local trout or traditional Minas comfort food.</p>
+</div>
+<div class="timeline__item">
+<p class="timeline__time">14:30</p>
+<p class="timeline__title">Vale da Gurita + Praia da Gurita</p>
+<p class="timeline__desc">River beach with rock formations. Calm, turquoise water surrounded by cerrado and sandstone cliffs.</p>
+</div>
+<div class="timeline__item">
+<p class="timeline__time">16:30</p>
+<p class="timeline__title">Coffee Farm Visit</p>
+<p class="timeline__desc">Minas specialty coffee tasting. Single-origin beans with notes of chocolate and citrus. Learn about the terroir.</p>
+</div>
+<div class="timeline__item">
+<p class="timeline__time">18:30</p>
+<p class="timeline__title">Lakeside Sunset</p>
+<p class="timeline__desc">Back at the Airbnb. Sun descends over Furnas. Artisanal cacha&ccedil;a envelhecida em carvalho in hand.</p>
+</div>
+<div class="timeline__tip">Bring swimwear for the waterfalls &mdash; the natural pools are irresistible.</div>
+</div>
+</div>
 
-            <!-- Day 4 -->
-            <div class="day-card">
-                <p class="day-number">Day 04 — Sunday</p>
-                <h3 class="day-title">归途 · 回到圣保罗</h3>
-                <p class="day-route">Delfinópolis → São Paulo</p>
-                <div class="day-details">
-                    <div class="day-stat">
-                        <p class="day-stat-label">Distance</p>
-                        <p class="day-stat-value">460 km</p>
-                    </div>
-                    <div class="day-stat">
-                        <p class="day-stat-label">Drive Time</p>
-                        <p class="day-stat-value">6.5–7h</p>
-                    </div>
-                </div>
-                <ul class="day-highlights">
-                    <li>早餐后出发</li>
-                    <li>高速午餐</li>
-                    <li>下午抵达圣保罗</li>
-                </ul>
-            </div>
-        </div>
-    </section>
+<!-- DAY 4 -->
+<div class="tabs__panel" id="day4" role="tabpanel">
+<div class="day-header">
+<p class="day-header__date">Jul 12, 2026 &middot; Sunday</p>
+<h3 class="day-header__title">Delfin&oacute;polis &rarr; S&atilde;o Paulo</h3>
+</div>
+<div class="timeline">
+<div class="timeline__item">
+<p class="timeline__time">08:00</p>
+<p class="timeline__title">Breakfast + Pack Up</p>
+<p class="timeline__desc">Last morning by the lake. Savor it. Pack memories alongside luggage.</p>
+</div>
+<div class="timeline__item">
+<p class="timeline__time">09:00</p>
+<p class="timeline__title">Depart for S&atilde;o Paulo</p>
+<p class="timeline__desc">460km, approximately 6.5 hours via MG-050 and SP-330. A long but scenic drive through Minas countryside.</p>
+</div>
+<div class="timeline__item">
+<p class="timeline__time">12:30</p>
+<p class="timeline__title">Highway Lunch Stop</p>
+<p class="timeline__desc">Last chance for comida mineira before returning to the city. Make it count.</p>
+</div>
+<div class="timeline__item">
+<p class="timeline__time">16:00</p>
+<p class="timeline__title">Arrive S&atilde;o Paulo</p>
+<p class="timeline__desc">Home. Carrying the silence of Canastra, the taste of queijo, and the memory of waterfalls.</p>
+</div>
+<div class="timeline__tip">Leave early to avoid Sunday evening traffic approaching S&atilde;o Paulo.</div>
+</div>
+</div>
 
-    <div class="section-divider"></div>
+</div><!-- end tabs -->
+</div><!-- end section -->
+</section>
 
-    <!-- Spots Section -->
-    <section id="spots">
-        <!-- Spread 1: Casca d'Anta -->
-        <div class="spread">
-            <div class="spread-image">
-                <img data-src="https://images.unsplash.com/photo-1551632811-561732d1e306?w=1200&q=80" alt="Casca d'Anta Waterfall" loading="lazy">
-            </div>
-            <div class="spread-content reveal">
-                <span class="spread-number">01</span>
-                <p class="section-label">National Park Highlight</p>
-                <h2 class="section-title">Casca d'Anta</h2>
-                <p class="section-subtitle">卡斯卡丹塔瀑布 · 186米落差</p>
-                <p class="spread-body">
-                    作为Serra da Canastra国家公园的标志性景观，Casca d'Anta是圣弗朗西斯科河（Rio São Francisco）的源头第一瀑。186米的落差使其成为公园内最壮观的瀑布，水流从高原边缘倾泻而下，在晨光中形成绚丽的彩虹。
-                </p>
-                <p class="spread-body">
-                    The first waterfall of the São Francisco River plunges 186 meters from the edge of the Canastra plateau — a sight that rewards the early morning trek.
-                </p>
-                <blockquote class="spread-quote">
-                    "在巴西腹地，藏着一条从天而降的白色丝带。"
-                </blockquote>
-            </div>
-        </div>
+<!-- CHAPTER 02 -->
+<section id="spots">
+<div class="chapter-header reveal">
+<p class="chapter-header__number">&mdash; 02 &mdash;</p>
+<p class="chapter-header__label">Chapter 02</p>
+<h2 class="chapter-header__title">六大亮点</h2>
+</div>
+<div class="section">
+<div class="spots-grid">
 
-        <!-- Full Width: Chapadão -->
-        <div class="full-image-section">
-            <img data-src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&q=80" alt="Chapadão da Canastra Plateau" loading="lazy">
-            <div class="full-image-overlay">
-                <div class="full-image-caption reveal">
-                    <p class="section-label">02 · Chapadão da Canastra</p>
-                    <h3>无尽高原</h3>
-                    <p>海拔1400米的卡纳斯特拉高原，是巴西塞拉多生态系统的精华所在。一望无际的草原与岩石地貌，鬃狼在黄昏中穿行，大食蚁兽在白蚁丘间觅食。这里是巴西最原始的荒野之一。</p>
-                </div>
-            </div>
-        </div>
+<div class="spot-card reveal">
+<img class="spot-card__img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Casca_d%27Anta.jpg/1200px-Casca_d%27Anta.jpg" alt="Casca d'Anta waterfall" loading="lazy">
+<div class="spot-card__body">
+<p class="spot-card__number">01</p>
+<h3 class="spot-card__title">Casca d'Anta</h3>
+<p class="spot-card__desc">A 186-meter waterfall marking the source of the S&atilde;o Francisco River. Brazil's third-longest river begins here as a thin stream before plunging off the plateau in a spectacular free-fall. The upper viewpoint offers panoramic vistas; the lower trail leads to the base pool.</p>
+</div>
+</div>
 
-        <!-- Spread 2: Canastra Cheese -->
-        <div class="spread" style="direction: rtl;">
-            <div class="spread-image" style="direction: ltr;">
-                <img data-src="https://images.unsplash.com/photo-1486297678162-eb2a19b0a32d?w=1200&q=80" alt="Canastra Artisanal Cheese" loading="lazy">
-            </div>
-            <div class="spread-content reveal" style="direction: ltr;">
-                <span class="spread-number">03</span>
-                <p class="section-label">Artisanal Heritage</p>
-                <h2 class="section-title">Queijo Canastra</h2>
-                <p class="section-subtitle">卡纳斯特拉奶酪 · 200年手工传承</p>
-                <p class="spread-body">
-                    卡纳斯特拉奶酪是巴西最负盛名的手工奶酪，拥有超过200年的制作传统。每一轮奶酪都使用当地牧场的生鲜牛奶，以独特的天然酵母「pingo」发酵，在木架上自然熟成。浓郁的坚果香气与微酸的口感，是米纳斯州乡村生活的味觉符号。
-                </p>
-                <p class="spread-body">
-                    Canastra cheese carries a 200-year legacy of artisanal craft. Each wheel is hand-molded with fresh raw milk and the legendary "pingo" starter — a living culture passed between generations.
-                </p>
-                <blockquote class="spread-quote">
-                    "一块奶酪，承载着两百年的乡愁。"
-                </blockquote>
-            </div>
-        </div>
+<div class="spot-card reveal">
+<img class="spot-card__img" src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&q=80" alt="Chapadao da Canastra plateau" loading="lazy">
+<div class="spot-card__body">
+<p class="spot-card__number">02</p>
+<h3 class="spot-card__title">Chapad&atilde;o da Canastra</h3>
+<p class="spot-card__desc">A 1400-meter altitude plateau stretching across the park's spine. The cerrado ecosystem here hosts unique flora and fauna adapted to high-altitude grasslands. Driving across feels like traversing another planet &mdash; endless sky meeting golden grass.</p>
+</div>
+</div>
 
-        <!-- Full Width: Complexo do Claro -->
-        <div class="full-image-section">
-            <img data-src="https://images.unsplash.com/photo-1432405972618-c6b0cfba8b46?w=1920&q=80" alt="Complexo do Claro Waterfalls" loading="lazy">
-            <div class="full-image-overlay">
-                <div class="full-image-caption reveal">
-                    <p class="section-label">04 · Complexo do Claro</p>
-                    <h3>瀑布群的交响曲</h3>
-                    <p>Delfinópolis 最壮观的瀑布群落，多级瀑布沿峡谷倾泻而下，天然泳池碧绿如翡翠。在炎热的米纳斯午后，跳入清凉的瀑布池，是最纯粹的巴西体验。</p>
-                </div>
-            </div>
-        </div>
+<div class="spot-card reveal">
+<img class="spot-card__img" src="https://images.unsplash.com/photo-1486297678162-eb2a19b0a32d?w=1200&q=80" alt="Queijo Canastra artisanal cheese" loading="lazy">
+<div class="spot-card__body">
+<p class="spot-card__number">03</p>
+<h3 class="spot-card__title">Queijo Canastra</h3>
+<p class="spot-card__desc">A 200-year artisanal cheese tradition recognized as Brazilian cultural heritage by IPHAN. Made from raw milk with natural pingo starter culture, each wheel tells the story of its terroir. From fresh and creamy to aged and crystalline &mdash; an essential tasting experience.</p>
+</div>
+</div>
 
-        <!-- Spread 3: Delfinópolis Lake & Sunset -->
-        <div class="spread">
-            <div class="spread-image">
-                <img data-src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=1200&q=80" alt="Delfinópolis Lakeside Sunset" loading="lazy">
-            </div>
-            <div class="spread-content reveal">
-                <span class="spread-number">05</span>
-                <p class="section-label">Golden Hour</p>
-                <h2 class="section-title">Lago de Furnas</h2>
-                <p class="section-subtitle">弗纳斯湖 · 米纳斯的海</p>
-                <p class="spread-body">
-                    被当地人称为"米纳斯之海"的弗纳斯湖，湖岸线蜿蜒数百公里。傍晚时分，金色的夕阳将整片湖面染成琥珀色。坐在湖边餐厅，一杯 cachaça，一盘炸鱼，等待最后一缕光线消失在地平线。
-                </p>
-                <p class="spread-body">
-                    Known as the "Sea of Minas", Furnas Lake stretches endlessly under the golden hour light. An evening of cachaça and fresh fish by the water is the perfect reward after a day of waterfalls.
-                </p>
-                <blockquote class="spread-quote">
-                    "这里的日落，值得你开460公里来看。"
-                </blockquote>
-            </div>
-        </div>
+<div class="spot-card reveal">
+<img class="spot-card__img" src="https://images.unsplash.com/photo-1432405972618-c6b0cfba8b46?w=1200&q=80" alt="Complexo do Claro waterfalls" loading="lazy">
+<div class="spot-card__body">
+<p class="spot-card__number">04</p>
+<h3 class="spot-card__title">Complexo do Claro</h3>
+<p class="spot-card__desc">A multi-level waterfall complex near Delfin&oacute;polis. Several cascades flow over red sandstone into natural swimming pools of startling clarity. Each level reveals new formations, slides, and pools. One of the region's finest bathing spots.</p>
+</div>
+</div>
 
-        <!-- Spread 4: Country Roads & GWM H6 -->
-        <div class="spread" style="direction: rtl;">
-            <div class="spread-image" style="direction: ltr;">
-                <img data-src="https://images.unsplash.com/photo-1533591380348-14193f1de18f?w=1200&q=80" alt="Off-road adventure" loading="lazy">
-            </div>
-            <div class="spread-content reveal" style="direction: ltr;">
-                <span class="spread-number">06</span>
-                <p class="section-label">The Journey</p>
-                <h2 class="section-title">GWM H6</h2>
-                <p class="section-subtitle">长城H6 · 公路旅行的完美搭档</p>
-                <p class="spread-body">
-                    Serra da Canastra 的魅力，有一半在路上。碎石路、山间弯道、泥泞小径——长城 H6 的四驱系统和高底盘让每一段未知路况都变成冒险的乐趣。打开天窗，塞拉多的风灌进车内，这就是公路旅行的意义。
-                </p>
-                <p class="spread-body">
-                    Half the magic of Canastra is the road itself. Gravel paths, mountain curves, mud tracks — the GWM H6 turns every challenge into pure driving pleasure.
-                </p>
-            </div>
-        </div>
+<div class="spot-card reveal">
+<img class="spot-card__img" src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=1200&q=80" alt="Lago de Furnas sunset" loading="lazy">
+<div class="spot-card__body">
+<p class="spot-card__number">05</p>
+<h3 class="spot-card__title">Lago de Furnas</h3>
+<p class="spot-card__desc">Known as the "Sea of Minas," this vast reservoir stretches across 1,440 square kilometers. Golden sunsets reflect off calm waters while the surrounding hills frame perfect evening scenes. A contemplative counterpoint to the park's wild energy.</p>
+</div>
+</div>
 
-        <!-- Full Width: Coffee -->
-        <div class="full-image-section">
-            <img data-src="https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=1920&q=80" alt="Minas Coffee Plantation" loading="lazy">
-            <div class="full-image-overlay">
-                <div class="full-image-caption reveal">
-                    <p class="section-label">07 · Café Mineiro</p>
-                    <h3>米纳斯咖啡</h3>
-                    <p>巴西最好的咖啡产区之一。在乡间庄园里，从烘焙到冲泡，体验一杯咖啡从种子到杯中的完整旅程。浓郁、醇厚、带着巧克力和坚果的余韵。</p>
-                </div>
-            </div>
-        </div>
-    </section>
+<div class="spot-card reveal">
+<img class="spot-card__img" src="https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=1920&q=80" alt="Minas Gerais specialty coffee" loading="lazy">
+<div class="spot-card__body">
+<p class="spot-card__number">06</p>
+<h3 class="spot-card__title">Caf&eacute; Mineiro</h3>
+<p class="spot-card__desc">Minas Gerais produces over half of Brazil's coffee. The Canastra region's altitude, climate, and volcanic soil yield exceptional single-origin beans. Notes of dark chocolate, citrus, and caramel. Visit a family farm, see the process from cherry to cup.</p>
+</div>
+</div>
 
-    <!-- Accommodation Section -->
-    <section id="stay" class="stay-section">
-        <div class="section-header reveal">
-            <p class="section-label">Where We Stay</p>
-            <h2 class="section-title title-display" style="font-size: clamp(32px, 6vw, 56px);">住宿</h2>
-        </div>
-        <div class="stay-grid">
-            <div class="stay-card reveal">
-                <div class="stay-card-img">
-                    <img data-src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&q=80" alt="Casa Serra da Canastra" loading="lazy">
-                </div>
-                <div class="stay-card-info">
-                    <p class="label-text" style="color: var(--gold);">Day 1 · Jul 9</p>
-                    <h4>Casa Serra da Canastra</h4>
-                    <p>São João Batista do Glória</p>
-                    <p class="subtitle-italic" style="font-size: 12px; opacity: 0.7; margin-top: 8px;">Gateway to the national park, perfect for an early morning start.</p>
-                </div>
-            </div>
-            <div class="stay-card reveal">
-                <div class="stay-card-img">
-                    <img data-src="https://images.unsplash.com/photo-1510798831971-661eb04b3739?w=800&q=80" alt="Lakeside Airbnb" loading="lazy">
-                </div>
-                <div class="stay-card-info">
-                    <p class="label-text" style="color: var(--gold);">Day 2–3 · Jul 10–11</p>
-                    <h4>Lakeside Retreat</h4>
-                    <p>São José da Barra, Minas Gerais</p>
-                    <p class="subtitle-italic" style="font-size: 12px; opacity: 0.7; margin-top: 8px;">A tranquil whole-house rental by the lake. Two nights of peace.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+</div><!-- end spots-grid -->
+</div>
+</section>
 
-    <!-- Highlights Section -->
-    <section class="highlights-section">
-        <div class="section-header reveal">
-            <p class="section-label">Trip Highlights</p>
-            <h2 class="section-title title-display" style="font-size: clamp(32px, 6vw, 56px);">✨ 行程亮点</h2>
-        </div>
-        <div class="highlights-grid reveal">
-            <div class="highlight-item">
-                <span class="highlight-icon">🚙</span>
-                <p>长城 H6 四驱SUV<br><span style="opacity:0.6; font-size:11px;">山路与碎石路的完美搭档</span></p>
-            </div>
-            <div class="highlight-item">
-                <span class="highlight-icon">🏞</span>
-                <p>Serra da Canastra 国家公园<br><span style="opacity:0.6; font-size:11px;">瀑布、高原、峡谷、野生动物</span></p>
-            </div>
-            <div class="highlight-item">
-                <span class="highlight-icon">🧀</span>
-                <p>正宗 Canastra 奶酪<br><span style="opacity:0.6; font-size:11px;">200年手工传承</span></p>
-            </div>
-            <div class="highlight-item">
-                <span class="highlight-icon">☕</span>
-                <p>米纳斯精品咖啡<br><span style="opacity:0.6; font-size:11px;">从种子到杯中的旅程</span></p>
-            </div>
-            <div class="highlight-item">
-                <span class="highlight-icon">🌅</span>
-                <p>弗纳斯湖日落<br><span style="opacity:0.6; font-size:11px;">米纳斯之海的黄金时刻</span></p>
-            </div>
-            <div class="highlight-item">
-                <span class="highlight-icon">📷</span>
-                <p>舒适节奏<br><span style="opacity:0.6; font-size:11px;">自驾乐趣 × 充足摄影时间</span></p>
-            </div>
-        </div>
-    </section>
+<!-- CHAPTER 03 -->
+<section id="practical">
+<div class="chapter-header reveal">
+<p class="chapter-header__number">&mdash; 03 &mdash;</p>
+<p class="chapter-header__label">Chapter 03</p>
+<h2 class="chapter-header__title">旅行者手记</h2>
+</div>
+<div class="section">
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="footer-content">
-            <p class="title-display" style="font-size: 24px; color: var(--gold);">Serra da Canastra</p>
-            <p class="subtitle-italic" style="font-size: 13px; opacity: 0.5; margin-top: 8px;">"The world is a book, and those who do not travel read only one page."</p>
-            <p style="font-size: 10px; opacity: 0.3; margin-top: 24px; letter-spacing: 0.1em;">ISLAND · 2026</p>
-        </div>
-    </footer>
+<div class="info-block reveal">
+<h3 class="info-block__title">Transportation</h3>
+<div class="info-block__content">
+<p>The main route follows BR-381 (Fern&atilde;o Dias) from S&atilde;o Paulo to MG-050, then local roads to S&atilde;o Jo&atilde;o Batista do Gl&oacute;ria. Total round trip approximately 880km.</p>
+<ul class="info-list">
+<li>Roads within Serra da Canastra are unpaved gravel &mdash; well-maintained but dusty in dry season</li>
+<li>4WD/AWD strongly recommended for the Chapad&atilde;o crossing</li>
+<li>Last gas station before the park: S&atilde;o Jo&atilde;o Batista do Gl&oacute;ria or S&atilde;o Roque de Minas</li>
+<li>Delfin&oacute;polis area roads are paved but some waterfall access roads are dirt</li>
+<li>SP-330 (Anhanguera) for the return is a well-maintained toll highway</li>
+</ul>
+</div>
+</div>
 
-    <script>
-        // Lazy Loading
-        const lazyImages = document.querySelectorAll('img[data-src]');
-        const imageObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const img = entry.target;
-                    img.src = img.dataset.src;
-                    img.removeAttribute('data-src');
-                    img.classList.add('loaded');
-                    imageObserver.unobserve(img);
-                }
-            });
-        }, { rootMargin: '200px' });
-        lazyImages.forEach(img => imageObserver.observe(img));
+<div class="info-block reveal">
+<h3 class="info-block__title">Accommodation</h3>
+<div class="info-block__content">
+<ul class="info-list">
+<li>Night 1: Casa Serra da Canastra &mdash; Pousada in S&atilde;o Jo&atilde;o Batista do Gl&oacute;ria, rustic-chic style with mountain views</li>
+<li>Nights 2-3: Lakeside Airbnb near Delfin&oacute;polis &mdash; Private house overlooking Furnas Reservoir with deck and BBQ area</li>
+<li>Book well in advance for July (dry season / Brazilian winter holidays)</li>
+<li>Bring warm layers &mdash; nights at altitude can drop to 8-12 degrees Celsius</li>
+</ul>
+</div>
+</div>
 
-        // Scroll Reveal
-        const reveals = document.querySelectorAll('.reveal');
-        const revealObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, { threshold: 0.15 });
-        reveals.forEach(el => revealObserver.observe(el));
+<div class="info-block reveal">
+<h3 class="info-block__title">Best Season</h3>
+<div class="info-block__content">
+<p>April to October (dry season) is ideal. Clear skies, mild temperatures, waterfalls flowing strong from late rainy season reserves. July offers the best combination of dry weather and full water volume. Avoid December-March when heavy rains can make park roads impassable and waterfalls dangerously strong.</p>
+</div>
+</div>
 
-        // Navigation active state
-        const sections = document.querySelectorAll('section[id]');
-        const navLinks = document.querySelectorAll('.nav-link');
-        const navObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    navLinks.forEach(link => link.classList.remove('active'));
-                    const activeLink = document.querySelector(`.nav-link[href="#${entry.target.id}"]`);
-                    if (activeLink) activeLink.classList.add('active');
-                }
-            });
-        }, { threshold: 0.3 });
-        sections.forEach(sec => navObserver.observe(sec));
+<div class="info-block reveal">
+<h3 class="info-block__title">Packing List</h3>
+<div class="info-block__content">
+<ul class="info-list">
+<li>Hiking boots or sturdy trail shoes (waterfall trails are slippery)</li>
+<li>Swimwear and quick-dry towel (natural pools everywhere)</li>
+<li>Sunscreen SPF50+ and wide-brim hat (plateau has no shade)</li>
+<li>Light rain jacket (morning mist can be heavy)</li>
+<li>Warm fleece for evenings (altitude cold)</li>
+<li>Binoculars for wildlife spotting</li>
+<li>Refillable water bottles (2L minimum per person for park days)</li>
+<li>Snacks and energy bars for the park crossing</li>
+<li>Cash (small towns may not accept cards everywhere)</li>
+<li>Camera with wide-angle lens for the landscapes</li>
+</ul>
+</div>
+</div>
 
-        // Smooth scroll for nav
-        navLinks.forEach(link => {
-            link.addEventListener('click', (e) => {
-                e.preventDefault();
-                const target = document.querySelector(link.getAttribute('href'));
-                if (target) target.scrollIntoView({ behavior: 'smooth' });
-            });
-        });
+<div class="info-block reveal">
+<h3 class="info-block__title">Safety Tips</h3>
+<div class="info-block__content">
+<ul class="info-list">
+<li>Gravel roads: maintain 40-60km/h, watch for loose stones and wildlife crossing</li>
+<li>Wildlife: observe from distance, never feed or approach maned wolves or anteaters</li>
+<li>Sun protection: the plateau at 1400m has intense UV, even on cloudy days</li>
+<li>Water safety: check current strength before swimming near waterfalls</li>
+<li>Phone signal: limited to non-existent inside the park; download offline maps</li>
+<li>Park hours: gates typically open 08:00-18:00; plan accordingly</li>
+</ul>
+</div>
+</div>
 
-        // Hero parallax
-        const hero = document.querySelector('.hero');
-        window.addEventListener('scroll', () => {
-            const scroll = window.pageYOffset;
-            if (hero && scroll < window.innerHeight) {
-                hero.style.transform = `translateY(${scroll * 0.3}px)`;
-            }
-        });
-    </script>
+<div class="info-block reveal">
+<h3 class="info-block__title">Vehicle: GWM H6</h3>
+<div class="info-block__content">
+<p>The GWM Haval H6 is well-suited for this trip. Key advantages for the Canastra route:</p>
+<ul class="info-list">
+<li>AWD system handles gravel roads and mild off-road sections confidently</li>
+<li>200mm ground clearance clears most obstacles on park roads</li>
+<li>Comfortable cabin for long highway stretches (420km+ per day)</li>
+<li>Large boot space for camping gear and provisions</li>
+<li>Fuel efficiency adequate for the full trip on 2-3 tanks</li>
+<li>Hill descent control useful on steep waterfall access roads</li>
+</ul>
+</div>
+</div>
+
+</div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+<p class="footer__farewell">At&eacute; logo, Canastra.</p>
+<p class="footer__quote">"The road not taken led to waterfalls, cheese, and silence. We took it anyway."</p>
+<p class="footer__brand">ISLAND &middot; 2026</p>
+</footer>
+
+<script>
+// Tab switching
+document.querySelectorAll('.tabs__btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const tabId = btn.dataset.tab;
+    const tabsContainer = btn.closest('.tabs');
+
+    tabsContainer.querySelectorAll('.tabs__btn').forEach(b => b.classList.remove('active'));
+    tabsContainer.querySelectorAll('.tabs__panel').forEach(p => p.classList.remove('active'));
+
+    btn.classList.add('active');
+    tabsContainer.querySelector('#' + tabId).classList.add('active');
+  });
+});
+
+// Scroll reveal
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// Smooth scroll for welcome button
+document.querySelector('.welcome__btn').addEventListener('click', (e) => {
+  e.preventDefault();
+  document.querySelector('#overview').scrollIntoView({ behavior: 'smooth' });
+});
+</script>
 </body>
 </html>
