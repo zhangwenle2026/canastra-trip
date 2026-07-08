@@ -2,517 +2,605 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="version" content="canastra-v2.1">
 <meta name="theme-color" content="#000000">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<title>Serra da Canastra - Road Trip</title>
+<title>Serra da Canastra</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Libre+Baskerville:ital,wght@0,400;1,400&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{--black:#000;--white:#FDFBF7;--gold:#D4A853;--glass-bg:rgba(255,255,255,0.08);--glass-border:rgba(255,255,255,0.15);--font-display:'Playfair Display',serif;--font-serif:'Libre Baskerville',serif;--font-body:'Inter',sans-serif}
-html{scroll-behavior:smooth;font-size:16px}
-body{background:var(--black);color:var(--white);font-family:var(--font-body);font-weight:300;line-height:1.7;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --cream:#FDFBF7;--black:#000;--gold:#D4A853;
+  --glass-bg:rgba(255,255,255,0.06);
+  --glass-border:rgba(255,255,255,0.12);
+  --ink-light:rgba(253,251,247,0.55);
+  --ink-faint:rgba(253,251,247,0.3);
+}
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
+body{font-family:'Inter',sans-serif;background:var(--black);color:var(--cream);overflow-x:hidden;font-weight:300;line-height:1.7}
 img{max-width:100%;display:block}
 a{color:inherit;text-decoration:none}
+::selection{background:rgba(212,168,83,0.3);color:#fff}
 
-.welcome{position:relative;width:100%;height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden}
-.welcome__bg{position:absolute;inset:0;background:url('https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Serra_da_Canastra_MG.jpg/1920px-Serra_da_Canastra_MG.jpg') center/cover no-repeat;filter:brightness(0.4);z-index:0}
-.welcome__content{position:relative;z-index:1;text-align:center;padding:2rem}
-.welcome__title{font-family:var(--font-display);font-weight:900;font-size:clamp(3rem,8vw,6rem);letter-spacing:-0.02em;line-height:1.1;margin-bottom:1rem}
-.welcome__subtitle{font-family:var(--font-serif);font-style:italic;font-size:clamp(1rem,2.5vw,1.4rem);color:rgba(253,251,247,0.8);margin-bottom:1.5rem}
-.welcome__info{font-family:var(--font-body);font-weight:500;font-size:0.75rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:3rem}
-.welcome__btn{display:inline-block;padding:1rem 3rem;background:var(--glass-bg);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid var(--glass-border);border-radius:4px;font-family:var(--font-body);font-weight:500;font-size:0.8rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--white);cursor:pointer;transition:all 0.3s ease}
-.welcome__btn:hover{background:rgba(212,168,83,0.15);border-color:var(--gold);color:var(--gold)}
+/* ===== HERO / WELCOME ===== */
+.hero{
+  position:relative;width:100%;height:100vh;min-height:640px;
+  display:flex;flex-direction:column;justify-content:center;align-items:center;
+  overflow:hidden;
+}
+.hero-bg{
+  position:absolute;inset:0;z-index:0;
+  background:url('https://msstest.sankuai.com/qacoverage-test/oversea/files/image/flowcopilot_121bc98c-c509-4c39-a6d9-434e07042b57.jpg') center/cover no-repeat;
+  animation:heroKenBurns 25s ease-in-out infinite alternate;
+  will-change:transform;
+}
+.hero-bg::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(180deg,
+    rgba(0,0,0,0.25) 0%,
+    rgba(0,0,0,0.15) 35%,
+    rgba(0,0,0,0.3) 65%,
+    rgba(0,0,0,0.75) 100%
+  );
+}
+@keyframes heroKenBurns{
+  0%{transform:scale(1) translate(0,0)}
+  100%{transform:scale(1.08) translate(-1%,-0.5%)}
+}
+.hero-content{
+  position:relative;z-index:2;text-align:center;padding:0 24px;
+}
+.hero-badge{
+  display:inline-block;
+  font-family:'Inter',sans-serif;font-weight:500;font-size:10px;
+  letter-spacing:4px;text-transform:uppercase;
+  color:rgba(255,255,255,0.7);
+  padding:8px 20px;border:1px solid rgba(255,255,255,0.2);
+  border-radius:24px;margin-bottom:32px;
+  backdrop-filter:blur(8px);background:rgba(255,255,255,0.05);
+  opacity:0;animation:fadeUp .8s .3s forwards;
+}
+.hero-title{
+  font-family:'Playfair Display',serif;font-weight:900;
+  font-size:clamp(52px,12vw,120px);line-height:0.9;
+  letter-spacing:-2px;color:#fff;
+  text-shadow:0 4px 60px rgba(0,0,0,.5),0 2px 8px rgba(0,0,0,.3);
+  margin-bottom:20px;opacity:0;animation:fadeUp .8s .5s forwards;
+}
+.hero-subtitle{
+  font-family:'Libre Baskerville',serif;font-style:italic;
+  font-size:clamp(14px,2.2vw,18px);color:rgba(255,255,255,0.7);
+  margin-bottom:12px;opacity:0;animation:fadeUp .8s .7s forwards;
+  text-shadow:0 2px 20px rgba(0,0,0,.5);
+}
+.hero-meta{
+  font-family:'Inter',sans-serif;font-weight:500;font-size:11px;
+  letter-spacing:3px;text-transform:uppercase;
+  color:var(--gold);margin-bottom:48px;
+  opacity:0;animation:fadeUp .8s .9s forwards;
+}
+.hero-scroll{
+  opacity:0;animation:fadeUp .8s 1.1s forwards;cursor:pointer;
+}
+.hero-scroll span{
+  display:block;width:26px;height:44px;border:2px solid rgba(255,255,255,0.4);
+  border-radius:13px;margin:0 auto;position:relative;
+  transition:border-color .3s;
+}
+.hero-scroll:hover span{border-color:rgba(255,255,255,0.9)}
+.hero-scroll span::after{
+  content:'';display:block;width:4px;height:8px;border-radius:2px;
+  background:rgba(255,255,255,0.7);position:absolute;left:50%;top:7px;
+  transform:translateX(-50%);animation:scrollDot 1.8s infinite;
+}
+@keyframes scrollDot{0%,100%{opacity:1;transform:translateX(-50%) translateY(0)}50%{opacity:.3;transform:translateX(-50%) translateY(16px)}}
+@keyframes fadeUp{to{opacity:1;transform:translateY(0)}}
+.hero-badge,.hero-title,.hero-subtitle,.hero-meta,.hero-scroll{transform:translateY(24px)}
 
-.chapter-header{text-align:center;padding:6rem 2rem 3rem}
-.chapter-header__number{font-family:var(--font-body);font-weight:300;font-size:0.75rem;letter-spacing:0.3em;color:var(--gold);margin-bottom:0.5rem}
-.chapter-header__label{font-family:var(--font-body);font-weight:500;font-size:0.65rem;letter-spacing:0.4em;text-transform:uppercase;color:rgba(253,251,247,0.4);margin-bottom:1rem}
-.chapter-header__title{font-family:var(--font-display);font-weight:900;font-size:clamp(2rem,5vw,3.5rem);letter-spacing:-0.01em}
+/* ===== CHAPTER HEADERS ===== */
+.chapter-head{
+  text-align:center;padding:100px 24px 48px;
+}
+.chapter-head__num{
+  font-family:'Inter',sans-serif;font-weight:300;font-size:12px;
+  letter-spacing:4px;color:var(--gold);margin-bottom:8px;
+}
+.chapter-head__label{
+  font-family:'Inter',sans-serif;font-weight:500;font-size:10px;
+  letter-spacing:5px;text-transform:uppercase;
+  color:var(--ink-faint);margin-bottom:16px;
+}
+.chapter-head__title{
+  font-family:'Playfair Display',serif;font-weight:900;
+  font-size:clamp(28px,6vw,48px);letter-spacing:-1px;
+  color:var(--cream);
+}
 
-.section{max-width:1100px;margin:0 auto;padding:0 2rem 6rem}
-.divider{width:60px;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:3rem auto}
+/* ===== SECTION CONTAINER ===== */
+.container{max-width:900px;margin:0 auto;padding:0 24px 80px}
+.divider{width:60px;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:48px auto}
 
-.route-line{text-align:center;font-family:var(--font-serif);font-style:italic;font-size:clamp(0.9rem,2vw,1.15rem);color:rgba(253,251,247,0.7);margin-bottom:2.5rem;line-height:1.8}
-.stats-bar{display:flex;justify-content:center;gap:2.5rem;flex-wrap:wrap;margin-bottom:3rem;padding:1.5rem;border-top:1px solid rgba(212,168,83,0.2);border-bottom:1px solid rgba(212,168,83,0.2)}
-.stat-item{text-align:center}
-.stat-item__value{font-family:var(--font-display);font-weight:700;font-size:1.5rem}
-.stat-item__label{font-size:0.7rem;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:rgba(253,251,247,0.5);margin-top:0.25rem}
+/* ===== ROUTE OVERVIEW ===== */
+.route-line{
+  text-align:center;font-family:'Libre Baskerville',serif;font-style:italic;
+  font-size:clamp(13px,1.8vw,16px);color:var(--ink-light);
+  line-height:2;margin-bottom:32px;
+}
+.stats{
+  display:flex;justify-content:center;gap:40px;flex-wrap:wrap;
+  padding:24px 0;margin-bottom:40px;
+  border-top:1px solid rgba(212,168,83,0.15);
+  border-bottom:1px solid rgba(212,168,83,0.15);
+}
+.stat{text-align:center}
+.stat__val{
+  font-family:'Playfair Display',serif;font-weight:700;
+  font-size:clamp(20px,3vw,28px);color:var(--cream);
+}
+.stat__lbl{
+  font-size:10px;font-weight:500;letter-spacing:2px;
+  text-transform:uppercase;color:var(--ink-faint);margin-top:4px;
+}
 
-.tabs{margin-bottom:2.5rem}
-.tabs__nav{display:flex;gap:0;border-bottom:1px solid rgba(255,255,255,0.1);overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
-.tabs__nav::-webkit-scrollbar{display:none}
-.tabs__btn{flex:1;min-width:100px;padding:1rem 1.5rem;background:none;border:none;border-bottom:2px solid transparent;font-family:var(--font-body);font-weight:500;font-size:0.8rem;letter-spacing:0.1em;text-transform:uppercase;color:rgba(253,251,247,0.4);cursor:pointer;transition:all 0.3s ease;white-space:nowrap}
-.tabs__btn:hover{color:rgba(253,251,247,0.7)}
-.tabs__btn.active{color:var(--gold);border-bottom-color:var(--gold)}
-.tabs__panel{display:none;animation:fadeIn 0.4s ease}
-.tabs__panel.active{display:block}
-@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+/* ===== TABS ===== */
+.tabs-nav{
+  display:flex;gap:0;margin-bottom:32px;
+  border-bottom:1px solid rgba(255,255,255,0.08);
+  overflow-x:auto;-webkit-overflow-scrolling:touch;
+  scrollbar-width:none;
+}
+.tabs-nav::-webkit-scrollbar{display:none}
+.tab-btn{
+  flex:1;min-width:90px;padding:16px 20px;
+  background:none;border:none;
+  border-bottom:2px solid transparent;
+  font-family:'Inter',sans-serif;font-weight:500;font-size:12px;
+  letter-spacing:1.5px;text-transform:uppercase;
+  color:rgba(253,251,247,0.35);cursor:pointer;
+  transition:all .3s;white-space:nowrap;
+}
+.tab-btn:hover{color:rgba(253,251,247,0.7)}
+.tab-btn.active{color:var(--gold);border-bottom-color:var(--gold)}
+.tab-panel{display:none;animation:panelIn .5s ease}
+.tab-panel.active{display:block}
+@keyframes panelIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
 
-.day-header{margin-bottom:2rem;padding-bottom:1rem;border-bottom:1px solid rgba(255,255,255,0.06)}
-.day-header__date{font-size:0.7rem;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:0.5rem}
-.day-header__title{font-family:var(--font-display);font-weight:700;font-size:1.5rem}
+/* ===== DAY TIMELINE ===== */
+.day-title-bar{
+  margin-bottom:28px;padding-bottom:16px;
+  border-bottom:1px solid rgba(255,255,255,0.05);
+}
+.day-date{
+  font-size:11px;font-weight:500;letter-spacing:2px;
+  text-transform:uppercase;color:var(--gold);margin-bottom:6px;
+}
+.day-title{
+  font-family:'Playfair Display',serif;font-weight:700;
+  font-size:clamp(20px,3.5vw,28px);letter-spacing:-0.5px;
+}
+.timeline{position:relative;padding-left:28px}
+.timeline::before{
+  content:'';position:absolute;left:0;top:8px;bottom:8px;
+  width:1px;
+  background:linear-gradient(180deg,var(--gold) 0%,rgba(212,168,83,0.1) 100%);
+}
+.tl-item{position:relative;padding-bottom:28px}
+.tl-item::before{
+  content:'';position:absolute;left:-32px;top:6px;
+  width:9px;height:9px;border-radius:50%;
+  background:var(--black);border:1.5px solid var(--gold);
+}
+.tl-time{
+  font-family:'Inter',sans-serif;font-weight:600;font-size:12px;
+  letter-spacing:1px;color:var(--gold);margin-bottom:4px;
+}
+.tl-name{
+  font-family:'Playfair Display',serif;font-weight:700;
+  font-size:17px;color:var(--cream);margin-bottom:6px;
+}
+.tl-desc{
+  font-family:'Inter',sans-serif;font-weight:300;font-size:14px;
+  color:var(--ink-light);line-height:1.8;
+}
+.tl-tip{
+  margin-top:20px;padding:16px 20px;
+  background:rgba(212,168,83,0.06);
+  border-left:2px solid var(--gold);
+  border-radius:0 6px 6px 0;
+  font-size:13px;font-weight:400;color:var(--ink-light);
+  font-style:italic;
+}
 
-.timeline{position:relative;padding-left:2rem}
-.timeline::before{content:'';position:absolute;left:0;top:0.5rem;bottom:0.5rem;width:1px;background:linear-gradient(180deg,var(--gold),rgba(212,168,83,0.1))}
-.timeline__item{position:relative;padding-bottom:2rem}
-.timeline__item:last-child{padding-bottom:0}
-.timeline__item::before{content:'';position:absolute;left:-2rem;top:0.5rem;width:7px;height:7px;border-radius:50%;background:var(--gold);transform:translateX(-3px)}
-.timeline__time{font-family:var(--font-body);font-weight:600;font-size:0.8rem;color:var(--gold);margin-bottom:0.25rem}
-.timeline__title{font-family:var(--font-body);font-weight:500;font-size:1rem;margin-bottom:0.4rem}
-.timeline__desc{font-size:0.9rem;color:rgba(253,251,247,0.6);line-height:1.7}
-.timeline__tip{margin-top:1.5rem;padding:1rem 1.25rem;background:rgba(212,168,83,0.06);border-left:2px solid var(--gold);font-family:var(--font-serif);font-style:italic;font-size:0.85rem;color:rgba(253,251,247,0.7)}
+/* ===== SPOT CARDS ===== */
+.spots-grid{
+  display:grid;grid-template-columns:1fr;gap:64px;
+}
+.spot{
+  display:grid;grid-template-columns:1fr 1fr;gap:32px;
+  align-items:center;
+}
+.spot:nth-child(even){direction:rtl}
+.spot:nth-child(even) > *{direction:ltr}
+.spot-img{
+  border-radius:8px;overflow:hidden;
+  aspect-ratio:4/3;
+}
+.spot-img img{
+  width:100%;height:100%;object-fit:cover;
+  transition:transform 6s cubic-bezier(.25,.46,.45,.94);
+}
+.spot:hover .spot-img img{transform:scale(1.08)}
+.spot-body{}
+.spot-num{
+  font-family:'Inter',sans-serif;font-weight:600;font-size:11px;
+  letter-spacing:3px;color:var(--gold);margin-bottom:8px;
+}
+.spot-name{
+  font-family:'Playfair Display',serif;font-weight:900;
+  font-size:clamp(22px,3vw,30px);letter-spacing:-0.5px;
+  margin-bottom:12px;
+}
+.spot-desc{
+  font-size:14px;font-weight:300;color:var(--ink-light);line-height:1.9;
+}
 
-.spots-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:2rem}
-.spot-card{position:relative;overflow:hidden;border-radius:4px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);transition:transform 0.3s ease,border-color 0.3s ease}
-.spot-card:hover{transform:translateY(-4px);border-color:rgba(212,168,83,0.3)}
-.spot-card__img{width:100%;height:200px;object-fit:cover;filter:brightness(0.8);transition:filter 0.3s ease}
-.spot-card:hover .spot-card__img{filter:brightness(0.9)}
-.spot-card__body{padding:1.5rem}
-.spot-card__number{font-family:var(--font-body);font-weight:300;font-size:0.7rem;letter-spacing:0.2em;color:var(--gold);margin-bottom:0.5rem}
-.spot-card__title{font-family:var(--font-display);font-weight:700;font-size:1.25rem;margin-bottom:0.75rem}
-.spot-card__desc{font-size:0.85rem;color:rgba(253,251,247,0.6);line-height:1.7}
-
-.info-block{margin-bottom:3rem}
-.info-block__title{font-family:var(--font-display);font-weight:700;font-size:1.25rem;margin-bottom:1rem;padding-bottom:0.5rem;border-bottom:1px solid rgba(212,168,83,0.2)}
-.info-block__content{font-size:0.9rem;color:rgba(253,251,247,0.7);line-height:1.8}
-.info-block__content p{margin-bottom:0.75rem}
+/* ===== PRACTICAL INFO ===== */
+.info-section{margin-bottom:48px}
+.info-title{
+  font-family:'Playfair Display',serif;font-weight:700;
+  font-size:20px;margin-bottom:16px;
+  padding-bottom:12px;
+  border-bottom:1px solid rgba(255,255,255,0.06);
+}
+.info-text{font-size:14px;color:var(--ink-light);line-height:1.9;margin-bottom:12px}
 .info-list{list-style:none;padding:0}
-.info-list li{position:relative;padding-left:1.25rem;margin-bottom:0.6rem;font-size:0.9rem;color:rgba(253,251,247,0.7)}
-.info-list li::before{content:'';position:absolute;left:0;top:0.65rem;width:4px;height:4px;border-radius:50%;background:var(--gold)}
+.info-list li{
+  position:relative;padding-left:16px;
+  font-size:14px;color:var(--ink-light);line-height:2;
+}
+.info-list li::before{
+  content:'';position:absolute;left:0;top:12px;
+  width:4px;height:4px;border-radius:50%;
+  background:var(--gold);
+}
 
-.footer{text-align:center;padding:6rem 2rem;border-top:1px solid rgba(255,255,255,0.05)}
-.footer__farewell{font-family:var(--font-serif);font-style:italic;font-size:clamp(1.5rem,4vw,2.5rem);margin-bottom:1.5rem}
-.footer__quote{font-family:var(--font-serif);font-style:italic;font-size:0.9rem;color:rgba(253,251,247,0.5);max-width:500px;margin:0 auto 2rem}
-.footer__brand{font-family:var(--font-body);font-weight:500;font-size:0.65rem;letter-spacing:0.4em;text-transform:uppercase;color:rgba(253,251,247,0.3)}
+/* ===== FOOTER ===== */
+.footer{
+  padding:80px 24px;text-align:center;
+  border-top:1px solid rgba(255,255,255,0.05);
+}
+.footer-farewell{
+  font-family:'Libre Baskerville',serif;font-style:italic;
+  font-size:clamp(20px,4vw,32px);color:var(--cream);margin-bottom:16px;
+}
+.footer-quote{
+  font-family:'Inter',sans-serif;font-size:13px;
+  color:var(--ink-faint);max-width:480px;margin:0 auto 32px;line-height:1.8;
+}
+.footer-brand{
+  font-family:'Inter',sans-serif;font-weight:500;font-size:10px;
+  letter-spacing:4px;text-transform:uppercase;color:rgba(253,251,247,0.18);
+}
 
-.reveal{opacity:0;transform:translateY(30px);transition:opacity 0.8s ease,transform 0.8s ease}
+/* ===== SCROLL REVEAL ===== */
+.reveal{
+  opacity:0;transform:translateY(36px);
+  transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1);
+}
 .reveal.visible{opacity:1;transform:translateY(0)}
+.reveal.d1{transition-delay:.12s}
+.reveal.d2{transition-delay:.24s}
+.reveal.d3{transition-delay:.36s}
 
+/* ===== RESPONSIVE ===== */
 @media(max-width:768px){
-.stats-bar{gap:1.5rem}
-.spots-grid{grid-template-columns:1fr}
-.tabs__btn{min-width:80px;padding:0.75rem 1rem;font-size:0.7rem}
-.section{padding:0 1.25rem 4rem}
-.chapter-header{padding:4rem 1.25rem 2rem}
+  .spot{grid-template-columns:1fr;gap:20px}
+  .spot:nth-child(even){direction:ltr}
+  .stats{gap:24px}
+  .container{padding:0 20px 60px}
+  .chapter-head{padding:72px 20px 36px}
 }
 @media(max-width:480px){
-.welcome__title{font-size:2.5rem}
-.stats-bar{flex-direction:column;gap:1rem}
+  .tab-btn{padding:12px 14px;font-size:11px;min-width:72px}
+  .tl-name{font-size:15px}
 }
 </style>
 </head>
 <body>
 
-<!-- WELCOME -->
-<section class="welcome" id="welcome">
-<div class="welcome__bg"></div>
-<div class="welcome__content">
-<h1 class="welcome__title">Serra da Canastra</h1>
-<p class="welcome__subtitle">秘境公路之旅 &middot; A Hidden Road Trip</p>
-<p class="welcome__info">Jul 9&ndash;12, 2026 &middot; 4 Days &middot; GWM H6</p>
-<a href="#overview" class="welcome__btn">Explore</a>
-</div>
+<!-- ===== HERO / WELCOME ===== -->
+<section class="hero" id="top">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <div class="hero-badge">Road Trip Journal</div>
+    <h1 class="hero-title">Serra da<br>Canastra</h1>
+    <p class="hero-subtitle">Where the São Francisco River begins its 2,914km journey to the sea</p>
+    <p class="hero-meta">Jul 9 – 12, 2026  ·  4 Days  ·  GWM H6</p>
+    <div class="hero-scroll" id="scrollCue" role="button" aria-label="Scroll down"><span></span></div>
+  </div>
 </section>
 
-<!-- CHAPTER 01 -->
+<!-- ===== CHAPTER 01: ITINERARY ===== -->
 <section id="overview">
-<div class="chapter-header reveal">
-<p class="chapter-header__number">&mdash; 01 &mdash;</p>
-<p class="chapter-header__label">Chapter 01</p>
-<h2 class="chapter-header__title">行程总览</h2>
-</div>
-<div class="section">
-<p class="route-line reveal">S&atilde;o Paulo &rarr; S&atilde;o Jo&atilde;o B. do Gl&oacute;ria &rarr; Serra da Canastra &rarr; Delfin&oacute;polis &rarr; S&atilde;o Paulo</p>
-<div class="stats-bar reveal">
-<div class="stat-item"><div class="stat-item__value">880km</div><div class="stat-item__label">Total Distance</div></div>
-<div class="stat-item"><div class="stat-item__value">4D3N</div><div class="stat-item__label">Duration</div></div>
-<div class="stat-item"><div class="stat-item__value">GWM H6</div><div class="stat-item__label">Vehicle</div></div>
-<div class="stat-item"><div class="stat-item__value">Jul 9&ndash;12</div><div class="stat-item__label">Dates</div></div>
-</div>
-<div class="divider"></div>
+  <div class="chapter-head reveal">
+    <p class="chapter-head__num">— 01 —</p>
+    <p class="chapter-head__label">Chapter One</p>
+    <h2 class="chapter-head__title">Roteiro</h2>
+  </div>
 
-<!-- TABS -->
-<div class="tabs reveal">
-<div class="tabs__nav" role="tablist">
-<button class="tabs__btn active" role="tab" data-tab="day1">Day 1</button>
-<button class="tabs__btn" role="tab" data-tab="day2">Day 2</button>
-<button class="tabs__btn" role="tab" data-tab="day3">Day 3</button>
-<button class="tabs__btn" role="tab" data-tab="day4">Day 4</button>
-</div>
+  <div class="container">
+    <p class="route-line reveal">
+      São Paulo → São João B. do Glória → Serra da Canastra<br>→ Delfinópolis → São Paulo
+    </p>
 
-<!-- DAY 1 -->
-<div class="tabs__panel active" id="day1" role="tabpanel">
-<div class="day-header">
-<p class="day-header__date">Jul 9, 2026 &middot; Thursday</p>
-<h3 class="day-header__title">S&atilde;o Paulo &rarr; S&atilde;o Jo&atilde;o Batista do Gl&oacute;ria</h3>
-</div>
-<div class="timeline">
-<div class="timeline__item">
-<p class="timeline__time">07:00</p>
-<p class="timeline__title">Departure from S&atilde;o Paulo</p>
-<p class="timeline__desc">420km ahead. Take BR-381 (Fern&atilde;o Dias) then MG-050 toward Passos. Early start to beat metropolitan traffic.</p>
-</div>
-<div class="timeline__item">
-<p class="timeline__time">12:00</p>
-<p class="timeline__title">Highway Lunch Stop</p>
-<p class="timeline__desc">Posto Graal or local restaurant near Ribeir&atilde;o Preto area. Stretch, refuel the car and yourself.</p>
-</div>
-<div class="timeline__item">
-<p class="timeline__time">15:00</p>
-<p class="timeline__title">Arrive S&atilde;o Jo&atilde;o Batista do Gl&oacute;ria</p>
-<p class="timeline__desc">Gateway to Serra da Canastra. A quiet Minas town of 7,000 souls at the edge of the national park.</p>
-</div>
-<div class="timeline__item">
-<p class="timeline__time">16:30</p>
-<p class="timeline__title">Check in at Casa Serra da Canastra</p>
-<p class="timeline__desc">Settle into the pousada. Mountain air, silence, and the slow rhythm of rural Minas Gerais.</p>
-</div>
-<div class="timeline__item">
-<p class="timeline__time">18:00</p>
-<p class="timeline__title">Evening Stroll</p>
-<p class="timeline__desc">Wander through the small town. Golden hour light paints the surrounding hills. Feel the tranquility.</p>
-</div>
-<div class="timeline__item">
-<p class="timeline__time">19:30</p>
-<p class="timeline__title">Dinner &mdash; Comida Mineira</p>
-<p class="timeline__desc">Feij&atilde;o tropeiro, lingui&ccedil;a artesanal, p&atilde;o de queijo, couve refogada. The authentic soul of Minas on a plate.</p>
-</div>
-<div class="timeline__tip">Fill up gas in town &mdash; no gas stations inside the national park boundaries.</div>
-</div>
-</div>
+    <div class="stats reveal">
+      <div class="stat"><div class="stat__val">880km</div><div class="stat__lbl">Total Distance</div></div>
+      <div class="stat"><div class="stat__val">4D 3N</div><div class="stat__lbl">Duration</div></div>
+      <div class="stat"><div class="stat__val">GWM H6</div><div class="stat__lbl">Vehicle</div></div>
+      <div class="stat"><div class="stat__val">Jul 9–12</div><div class="stat__lbl">Dates</div></div>
+    </div>
 
-<!-- DAY 2 -->
-<div class="tabs__panel" id="day2" role="tabpanel">
-<div class="day-header">
-<p class="day-header__date">Jul 10, 2026 &middot; Friday</p>
-<h3 class="day-header__title">Serra da Canastra National Park &rarr; Delfin&oacute;polis</h3>
-</div>
-<div class="timeline">
-<div class="timeline__item">
-<p class="timeline__time">06:30</p>
-<p class="timeline__title">Early Departure</p>
-<p class="timeline__desc">Best light for photography. Morning mist rises from the valleys creating ethereal scenes.</p>
-</div>
-<div class="timeline__item">
-<p class="timeline__time">07:30</p>
-<p class="timeline__title">Enter Serra da Canastra National Park</p>
-<p class="timeline__desc">R$36/person entry. 200,000 hectares of cerrado, grasslands, rocky plateaus. Source of the S&atilde;o Francisco River.</p>
-</div>
-<div class="timeline__item">
-<p class="timeline__time">08:30</p>
-<p class="timeline__title">Casca d'Anta Waterfall Viewpoint</p>
-<p class="timeline__desc">186m drop &mdash; the highest waterfall of the S&atilde;o Francisco River. An immense cascade plunging into the valley below.</p>
-</div>
-<div class="timeline__item">
-<p class="timeline__time">10:30</p>
-<p class="timeline__title">Drive Across Chapad&atilde;o da Canastra</p>
-<p class="timeline__desc">Gravel road at 1400m altitude. Vast cerrado landscape to the horizon. GWM H6 AWD handles it well.</p>
-</div>
-<div class="timeline__item">
-<p class="timeline__time">12:00</p>
-<p class="timeline__title">Canastra Cheese Farm + Lunch</p>
-<p class="timeline__desc">Queijo canastra tasting &mdash; aged 22 days to over a year. A 200-year artisanal tradition recognized by IPHAN.</p>
-</div>
-<div class="timeline__item">
-<p class="timeline__time">14:00</p>
-<p class="timeline__title">Wildlife Spotting</p>
-<p class="timeline__desc">Slow drive through the park. Maned wolves, giant anteaters, rheas, and the elusive puma inhabit these grasslands.</p>
-</div>
-<div class="timeline__item">
-<p class="timeline__time">16:00</p>
-<p class="timeline__title">Exit Park, Drive to Delfin&oacute;polis</p>
-<p class="timeline__desc">Landscape shifts from plateau cerrado to lake country near S&atilde;o Jos&eacute; da Barra.</p>
-</div>
-<div class="timeline__item">
-<p class="timeline__time">18:00</p>
-<p class="timeline__title">Check in Lakeside Airbnb</p>
-<p class="timeline__desc">House overlooking Furnas Reservoir. Watch the sunset paint the lake gold and amber.</p>
-</div>
-<div class="timeline__item">
-<p class="timeline__time">19:30</p>
-<p class="timeline__title">Lakeside Dinner</p>
-<p class="timeline__desc">Fresh fish, local cuisine, the sound of water. Furnas reservoir stretching to the horizon.</p>
-</div>
-<div class="timeline__tip">Carry snacks, water, and a full tank &mdash; no shops or services inside the park.</div>
-</div>
-</div>
+    <!-- Tabs -->
+    <div class="tabs-nav reveal" role="tablist">
+      <button class="tab-btn active" data-tab="day1" role="tab">Day 1</button>
+      <button class="tab-btn" data-tab="day2" role="tab">Day 2</button>
+      <button class="tab-btn" data-tab="day3" role="tab">Day 3</button>
+      <button class="tab-btn" data-tab="day4" role="tab">Day 4</button>
+    </div>
 
-<!-- DAY 3 -->
-<div class="tabs__panel" id="day3" role="tabpanel">
-<div class="day-header">
-<p class="day-header__date">Jul 11, 2026 &middot; Saturday</p>
-<h3 class="day-header__title">Explore Delfin&oacute;polis</h3>
-</div>
-<div class="timeline">
-<div class="timeline__item">
-<p class="timeline__time">08:30</p>
-<p class="timeline__title">Relaxed Breakfast</p>
-<p class="timeline__desc">No rush. Coffee with a lake view, fresh fruit, p&atilde;o de queijo. Let the morning unfold slowly.</p>
-</div>
-<div class="timeline__item">
-<p class="timeline__time">10:00</p>
-<p class="timeline__title">Complexo do Claro</p>
-<p class="timeline__desc">Multiple cascades and natural pools carved into red sandstone. Crystal-clear water perfect for swimming.</p>
-</div>
-<div class="timeline__item">
-<p class="timeline__time">13:00</p>
-<p class="timeline__title">Lunch in Delfin&oacute;polis</p>
-<p class="timeline__desc">Charming small town with good restaurants. Local trout or traditional Minas comfort food.</p>
-</div>
-<div class="timeline__item">
-<p class="timeline__time">14:30</p>
-<p class="timeline__title">Vale da Gurita + Praia da Gurita</p>
-<p class="timeline__desc">River beach with rock formations. Calm, turquoise water surrounded by cerrado and sandstone cliffs.</p>
-</div>
-<div class="timeline__item">
-<p class="timeline__time">16:30</p>
-<p class="timeline__title">Coffee Farm Visit</p>
-<p class="timeline__desc">Minas specialty coffee tasting. Single-origin beans with notes of chocolate and citrus. Learn about the terroir.</p>
-</div>
-<div class="timeline__item">
-<p class="timeline__time">18:30</p>
-<p class="timeline__title">Lakeside Sunset</p>
-<p class="timeline__desc">Back at the Airbnb. Sun descends over Furnas. Artisanal cacha&ccedil;a envelhecida em carvalho in hand.</p>
-</div>
-<div class="timeline__tip">Bring swimwear for the waterfalls &mdash; the natural pools are irresistible.</div>
-</div>
-</div>
+    <!-- DAY 1 -->
+    <div class="tab-panel active" id="day1" role="tabpanel">
+      <div class="day-title-bar">
+        <p class="day-date">Jul 9, 2026 · Thursday</p>
+        <h3 class="day-title">São Paulo → São João Batista do Glória</h3>
+      </div>
+      <div class="timeline">
+        <div class="tl-item"><p class="tl-time">07:00</p><p class="tl-name">Departure from São Paulo</p><p class="tl-desc">420km ahead. Take BR-381 (Fernão Dias) then MG-050 toward Passos. Early start to beat metropolitan traffic and cross the state border before noon.</p></div>
+        <div class="tl-item"><p class="tl-time">12:00</p><p class="tl-name">Highway Lunch</p><p class="tl-desc">Posto Graal or a local restaurant near Ribeirão Preto. Stretch, refuel the car, fuel yourself. The second half of the drive is quieter, greener.</p></div>
+        <div class="tl-item"><p class="tl-time">15:00</p><p class="tl-name">Arrive São João Batista do Glória</p><p class="tl-desc">Gateway to Serra da Canastra. A quiet Minas town of 7,000 souls at the edge of the national park. The air already smells different here — cerrado, eucalyptus, distance from the city.</p></div>
+        <div class="tl-item"><p class="tl-time">16:30</p><p class="tl-name">Check in: Casa Serra da Canastra</p><p class="tl-desc">Settle into the pousada. Mountain air, absolute silence, and the slow rhythm of rural Minas Gerais. The plateau looms golden in the afternoon light.</p></div>
+        <div class="tl-item"><p class="tl-time">18:00</p><p class="tl-name">Evening Stroll</p><p class="tl-desc">Wander through the small town. Golden-hour light paints the surrounding hills in amber. A church bell. Dogs sleeping on warm sidewalks. The tranquility is physical.</p></div>
+        <div class="tl-item"><p class="tl-time">19:30</p><p class="tl-name">Dinner: Comida Mineira</p><p class="tl-desc">Feijão tropeiro, linguiça artesanal, pão de queijo, couve refogada. The authentic soul of Minas on a plate. A cold Brahma to seal the day.</p></div>
+        <p class="tl-tip">Fill up gas in town. No fuel stations exist inside the national park boundaries.</p>
+      </div>
+    </div>
 
-<!-- DAY 4 -->
-<div class="tabs__panel" id="day4" role="tabpanel">
-<div class="day-header">
-<p class="day-header__date">Jul 12, 2026 &middot; Sunday</p>
-<h3 class="day-header__title">Delfin&oacute;polis &rarr; S&atilde;o Paulo</h3>
-</div>
-<div class="timeline">
-<div class="timeline__item">
-<p class="timeline__time">08:00</p>
-<p class="timeline__title">Breakfast + Pack Up</p>
-<p class="timeline__desc">Last morning by the lake. Savor it. Pack memories alongside luggage.</p>
-</div>
-<div class="timeline__item">
-<p class="timeline__time">09:00</p>
-<p class="timeline__title">Depart for S&atilde;o Paulo</p>
-<p class="timeline__desc">460km, approximately 6.5 hours via MG-050 and SP-330. A long but scenic drive through Minas countryside.</p>
-</div>
-<div class="timeline__item">
-<p class="timeline__time">12:30</p>
-<p class="timeline__title">Highway Lunch Stop</p>
-<p class="timeline__desc">Last chance for comida mineira before returning to the city. Make it count.</p>
-</div>
-<div class="timeline__item">
-<p class="timeline__time">16:00</p>
-<p class="timeline__title">Arrive S&atilde;o Paulo</p>
-<p class="timeline__desc">Home. Carrying the silence of Canastra, the taste of queijo, and the memory of waterfalls.</p>
-</div>
-<div class="timeline__tip">Leave early to avoid Sunday evening traffic approaching S&atilde;o Paulo.</div>
-</div>
-</div>
+    <!-- DAY 2 -->
+    <div class="tab-panel" id="day2" role="tabpanel">
+      <div class="day-title-bar">
+        <p class="day-date">Jul 10, 2026 · Friday</p>
+        <h3 class="day-title">Serra da Canastra → Delfinópolis</h3>
+      </div>
+      <div class="timeline">
+        <div class="tl-item"><p class="tl-time">06:30</p><p class="tl-name">Early Departure</p><p class="tl-desc">Best light for photography. Morning mist rises from the valleys, creating ethereal scenes. Cold air at altitude — bring a fleece.</p></div>
+        <div class="tl-item"><p class="tl-time">07:30</p><p class="tl-name">Enter Serra da Canastra National Park</p><p class="tl-desc">R$36/person entry. 200,000 hectares of cerrado, grasslands, and rocky plateaus. The source of the São Francisco River — Brazil's river of national unity.</p></div>
+        <div class="tl-item"><p class="tl-time">08:30</p><p class="tl-name">Casca d'Anta Waterfall</p><p class="tl-desc">186m drop — the highest waterfall of the São Francisco. An immense cascade plunging into the valley below, mist rising like smoke. The upper viewpoint offers panoramic vistas; the lower trail descends to the base pool.</p></div>
+        <div class="tl-item"><p class="tl-time">10:30</p><p class="tl-name">Chapadão da Canastra</p><p class="tl-desc">Drive across the plateau at 1,400m. Gravel road through vast cerrado landscape stretching to the horizon. The GWM H6 AWD handles it confidently. Silence so deep you hear the wind in the grass.</p></div>
+        <div class="tl-item"><p class="tl-time">12:00</p><p class="tl-name">Canastra Cheese Farm</p><p class="tl-desc">Queijo canastra tasting — aged from 22 days to over a year. A 200-year artisanal tradition recognized by IPHAN. From fresh and milky to crystalline and sharp. Lunch at the farm.</p></div>
+        <div class="tl-item"><p class="tl-time">14:00</p><p class="tl-name">Wildlife Spotting</p><p class="tl-desc">Slow drive through the park. Maned wolves, giant anteaters, rheas, and the elusive puma. Keep windows down, engine quiet. These grasslands are alive.</p></div>
+        <div class="tl-item"><p class="tl-time">16:00</p><p class="tl-name">Drive to Delfinópolis</p><p class="tl-desc">Exit the park. Landscape shifts from high cerrado to lake country near São José da Barra. The reservoir appears like a mirage — vast and golden.</p></div>
+        <div class="tl-item"><p class="tl-time">18:00</p><p class="tl-name">Check in: Lakeside Airbnb</p><p class="tl-desc">House overlooking Furnas Reservoir. A deck, a hammock, and the sunset painting the water in gold and amber. Settle in for two nights.</p></div>
+        <div class="tl-item"><p class="tl-time">19:30</p><p class="tl-name">Lakeside Dinner</p><p class="tl-desc">Fresh fish, local cachaça, the sound of water lapping against rock. Furnas stretching to the darkening horizon. Stars emerge without competition.</p></div>
+        <p class="tl-tip">Carry snacks, water, and a full tank. No shops or services exist inside the park.</p>
+      </div>
+    </div>
 
-</div><!-- end tabs -->
-</div><!-- end section -->
+    <!-- DAY 3 -->
+    <div class="tab-panel" id="day3" role="tabpanel">
+      <div class="day-title-bar">
+        <p class="day-date">Jul 11, 2026 · Saturday</p>
+        <h3 class="day-title">Delfinópolis</h3>
+      </div>
+      <div class="timeline">
+        <div class="tl-item"><p class="tl-time">08:30</p><p class="tl-name">Relaxed Breakfast</p><p class="tl-desc">No rush. Coffee with a lake view, fresh fruit, pão de queijo warm from the oven. Let the morning unfold at its own pace.</p></div>
+        <div class="tl-item"><p class="tl-time">10:00</p><p class="tl-name">Complexo do Claro</p><p class="tl-desc">Multiple cascades and natural pools carved into red sandstone over millennia. Crystal-clear water, 24 degrees year-round. Swim beneath waterfalls, slide down natural rock chutes.</p></div>
+        <div class="tl-item"><p class="tl-time">13:00</p><p class="tl-name">Lunch in Delfinópolis</p><p class="tl-desc">Charming small town with surprisingly good restaurants. Local trout grilled over eucalyptus coals, or traditional Minas comfort food. Cold beer, warm bread.</p></div>
+        <div class="tl-item"><p class="tl-time">14:30</p><p class="tl-name">Vale da Gurita</p><p class="tl-desc">River beach with sculptural rock formations. Calm turquoise water surrounded by cerrado and sandstone cliffs that glow orange in the afternoon sun.</p></div>
+        <div class="tl-item"><p class="tl-time">16:30</p><p class="tl-name">Coffee Farm Visit</p><p class="tl-desc">Minas specialty coffee tasting. Single-origin beans with notes of dark chocolate and citrus fruit. Learn about terroir, altitude, and the cherry-to-cup process.</p></div>
+        <div class="tl-item"><p class="tl-time">18:30</p><p class="tl-name">Lakeside Sunset</p><p class="tl-desc">Back at the Airbnb. Sun descends over Furnas. Artisanal cachaça envelhecida em carvalho in hand. The kind of silence that recalibrates you.</p></div>
+        <p class="tl-tip">Bring swimwear for the waterfalls — the natural pools are irresistible, even in winter.</p>
+      </div>
+    </div>
+
+    <!-- DAY 4 -->
+    <div class="tab-panel" id="day4" role="tabpanel">
+      <div class="day-title-bar">
+        <p class="day-date">Jul 12, 2026 · Sunday</p>
+        <h3 class="day-title">Delfinópolis → São Paulo</h3>
+      </div>
+      <div class="timeline">
+        <div class="tl-item"><p class="tl-time">08:00</p><p class="tl-name">Last Breakfast by the Lake</p><p class="tl-desc">Savor it. Morning light on water. The quiet hum of insects. Pack memories alongside luggage.</p></div>
+        <div class="tl-item"><p class="tl-time">09:00</p><p class="tl-name">Depart for São Paulo</p><p class="tl-desc">460km, approximately 6.5 hours via MG-050 and SP-330 (Anhanguera). A long but scenic drive through Minas countryside — rolling hills, coffee plantations, small colonial towns.</p></div>
+        <div class="tl-item"><p class="tl-time">12:30</p><p class="tl-name">Highway Lunch</p><p class="tl-desc">Last chance for comida mineira before returning to the metropolis. Make it count. Pão de queijo for the road.</p></div>
+        <div class="tl-item"><p class="tl-time">16:00</p><p class="tl-name">Arrive São Paulo</p><p class="tl-desc">Home. Carrying the silence of Canastra, the taste of queijo, the memory of mist rising from waterfalls. The city feels different now — louder, faster, but you've been somewhere real.</p></div>
+        <p class="tl-tip">Leave early to avoid Sunday evening traffic on the approach to São Paulo.</p>
+      </div>
+    </div>
+
+  </div>
 </section>
 
-<!-- CHAPTER 02 -->
+<!-- ===== CHAPTER 02: HIGHLIGHTS ===== -->
 <section id="spots">
-<div class="chapter-header reveal">
-<p class="chapter-header__number">&mdash; 02 &mdash;</p>
-<p class="chapter-header__label">Chapter 02</p>
-<h2 class="chapter-header__title">六大亮点</h2>
-</div>
-<div class="section">
-<div class="spots-grid">
+  <div class="chapter-head reveal">
+    <p class="chapter-head__num">— 02 —</p>
+    <p class="chapter-head__label">Chapter Two</p>
+    <h2 class="chapter-head__title">Destaques</h2>
+  </div>
 
-<div class="spot-card reveal">
-<img class="spot-card__img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Casca_d%27Anta.jpg/1200px-Casca_d%27Anta.jpg" alt="Casca d'Anta waterfall" loading="lazy">
-<div class="spot-card__body">
-<p class="spot-card__number">01</p>
-<h3 class="spot-card__title">Casca d'Anta</h3>
-<p class="spot-card__desc">A 186-meter waterfall marking the source of the S&atilde;o Francisco River. Brazil's third-longest river begins here as a thin stream before plunging off the plateau in a spectacular free-fall. The upper viewpoint offers panoramic vistas; the lower trail leads to the base pool.</p>
-</div>
-</div>
+  <div class="container">
+    <div class="spots-grid">
 
-<div class="spot-card reveal">
-<img class="spot-card__img" src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&q=80" alt="Chapadao da Canastra plateau" loading="lazy">
-<div class="spot-card__body">
-<p class="spot-card__number">02</p>
-<h3 class="spot-card__title">Chapad&atilde;o da Canastra</h3>
-<p class="spot-card__desc">A 1400-meter altitude plateau stretching across the park's spine. The cerrado ecosystem here hosts unique flora and fauna adapted to high-altitude grasslands. Driving across feels like traversing another planet &mdash; endless sky meeting golden grass.</p>
-</div>
-</div>
+      <div class="spot reveal">
+        <div class="spot-img"><img src="https://msstest.sankuai.com/qacoverage-test/oversea/files/image/flowcopilot_f66c9540-cff6-45e7-aa9a-cb34593b09f7.jpg" alt="Casca d'Anta" loading="lazy"></div>
+        <div class="spot-body">
+          <p class="spot-num">01</p>
+          <h3 class="spot-name">Casca d'Anta</h3>
+          <p class="spot-desc">A 186-meter waterfall marking the birthplace of the São Francisco River. Brazil's third-longest river begins here as a thin stream atop the plateau before plunging in a spectacular free-fall into the valley below. The upper viewpoint offers panoramic vistas across the cerrado; the lower trail leads to the thundering base pool.</p>
+        </div>
+      </div>
 
-<div class="spot-card reveal">
-<img class="spot-card__img" src="https://images.unsplash.com/photo-1486297678162-eb2a19b0a32d?w=1200&q=80" alt="Queijo Canastra artisanal cheese" loading="lazy">
-<div class="spot-card__body">
-<p class="spot-card__number">03</p>
-<h3 class="spot-card__title">Queijo Canastra</h3>
-<p class="spot-card__desc">A 200-year artisanal cheese tradition recognized as Brazilian cultural heritage by IPHAN. Made from raw milk with natural pingo starter culture, each wheel tells the story of its terroir. From fresh and creamy to aged and crystalline &mdash; an essential tasting experience.</p>
-</div>
-</div>
+      <div class="spot reveal">
+        <div class="spot-img"><img src="https://msstest.sankuai.com/qacoverage-test/oversea/files/image/flowcopilot_c7ac79f2-2c7a-4a12-b114-7e80a46146f2.jpg" alt="Chapadão da Canastra" loading="lazy"></div>
+        <div class="spot-body">
+          <p class="spot-num">02</p>
+          <h3 class="spot-name">Chapadão da Canastra</h3>
+          <p class="spot-desc">A 1,400-meter altitude plateau forming the park's spine. The cerrado ecosystem here hosts unique flora and fauna adapted to high-altitude grasslands, perpetual winds, and dramatic temperature swings. Driving across feels like traversing another planet — endless sky meeting golden grass at every horizon.</p>
+        </div>
+      </div>
 
-<div class="spot-card reveal">
-<img class="spot-card__img" src="https://images.unsplash.com/photo-1432405972618-c6b0cfba8b46?w=1200&q=80" alt="Complexo do Claro waterfalls" loading="lazy">
-<div class="spot-card__body">
-<p class="spot-card__number">04</p>
-<h3 class="spot-card__title">Complexo do Claro</h3>
-<p class="spot-card__desc">A multi-level waterfall complex near Delfin&oacute;polis. Several cascades flow over red sandstone into natural swimming pools of startling clarity. Each level reveals new formations, slides, and pools. One of the region's finest bathing spots.</p>
-</div>
-</div>
+      <div class="spot reveal">
+        <div class="spot-img"><img src="https://msstest.sankuai.com/qacoverage-test/oversea/files/image/flowcopilot_c3571625-d214-44d7-a346-2e76b48f3f8f.jpg" alt="Queijo Canastra" loading="lazy"></div>
+        <div class="spot-body">
+          <p class="spot-num">03</p>
+          <h3 class="spot-name">Queijo Canastra</h3>
+          <p class="spot-desc">A 200-year artisanal cheese tradition recognized as Brazilian cultural heritage by IPHAN. Made from raw milk with natural pingo starter culture, each wheel tells the story of its terroir. From fresh and creamy at 22 days to aged, crystalline, and intensely savory at one year — an essential tasting journey.</p>
+        </div>
+      </div>
 
-<div class="spot-card reveal">
-<img class="spot-card__img" src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=1200&q=80" alt="Lago de Furnas sunset" loading="lazy">
-<div class="spot-card__body">
-<p class="spot-card__number">05</p>
-<h3 class="spot-card__title">Lago de Furnas</h3>
-<p class="spot-card__desc">Known as the "Sea of Minas," this vast reservoir stretches across 1,440 square kilometers. Golden sunsets reflect off calm waters while the surrounding hills frame perfect evening scenes. A contemplative counterpoint to the park's wild energy.</p>
-</div>
-</div>
+      <div class="spot reveal">
+        <div class="spot-img"><img src="https://msstest.sankuai.com/qacoverage-test/oversea/files/image/flowcopilot_db112308-a7a6-4a91-9be6-d0d5c601cfca.jpg" alt="Complexo do Claro" loading="lazy"></div>
+        <div class="spot-body">
+          <p class="spot-num">04</p>
+          <h3 class="spot-name">Complexo do Claro</h3>
+          <p class="spot-desc">A multi-level waterfall complex near Delfinópolis. Several cascades flow over ancient red sandstone into natural swimming pools of startling clarity. Each level reveals new formations, rock slides, and emerald pools. One of the region's finest bathing spots — bring time, not just a towel.</p>
+        </div>
+      </div>
 
-<div class="spot-card reveal">
-<img class="spot-card__img" src="https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=1920&q=80" alt="Minas Gerais specialty coffee" loading="lazy">
-<div class="spot-card__body">
-<p class="spot-card__number">06</p>
-<h3 class="spot-card__title">Caf&eacute; Mineiro</h3>
-<p class="spot-card__desc">Minas Gerais produces over half of Brazil's coffee. The Canastra region's altitude, climate, and volcanic soil yield exceptional single-origin beans. Notes of dark chocolate, citrus, and caramel. Visit a family farm, see the process from cherry to cup.</p>
-</div>
-</div>
+      <div class="spot reveal">
+        <div class="spot-img"><img src="https://msstest.sankuai.com/qacoverage-test/oversea/files/image/flowcopilot_53ee9e73-d7c8-473b-91d4-6651fe832ca0.jpg" alt="Lago de Furnas" loading="lazy"></div>
+        <div class="spot-body">
+          <p class="spot-num">05</p>
+          <h3 class="spot-name">Lago de Furnas</h3>
+          <p class="spot-desc">Known as the "Mar de Minas" — the Sea of Minas — this vast reservoir stretches across 1,440 square kilometers. Golden sunsets reflect off calm waters while surrounding hills frame perfect evening tableaux. A contemplative counterpoint to the park's wild energy.</p>
+        </div>
+      </div>
 
-</div><!-- end spots-grid -->
-</div>
+      <div class="spot reveal">
+        <div class="spot-img"><img src="https://msstest.sankuai.com/qacoverage-test/oversea/files/image/flowcopilot_4acf9bfd-f5ea-480c-93c2-01970e11e1c6.jpg" alt="Café Mineiro" loading="lazy"></div>
+        <div class="spot-body">
+          <p class="spot-num">06</p>
+          <h3 class="spot-name">Café Mineiro</h3>
+          <p class="spot-desc">Minas Gerais produces over half of Brazil's coffee. The Canastra region's altitude, volcanic soil, and temperature differential yield exceptional single-origin beans — notes of dark chocolate, citrus, and brown sugar. Visit a family farm, see the process from cherry to cup, and understand why terroir matters.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
 </section>
 
-<!-- CHAPTER 03 -->
+<!-- ===== CHAPTER 03: PRACTICAL ===== -->
 <section id="practical">
-<div class="chapter-header reveal">
-<p class="chapter-header__number">&mdash; 03 &mdash;</p>
-<p class="chapter-header__label">Chapter 03</p>
-<h2 class="chapter-header__title">旅行者手记</h2>
-</div>
-<div class="section">
+  <div class="chapter-head reveal">
+    <p class="chapter-head__num">— 03 —</p>
+    <p class="chapter-head__label">Chapter Three</p>
+    <h2 class="chapter-head__title">Notas do Viajante</h2>
+  </div>
 
-<div class="info-block reveal">
-<h3 class="info-block__title">Transportation</h3>
-<div class="info-block__content">
-<p>The main route follows BR-381 (Fern&atilde;o Dias) from S&atilde;o Paulo to MG-050, then local roads to S&atilde;o Jo&atilde;o Batista do Gl&oacute;ria. Total round trip approximately 880km.</p>
-<ul class="info-list">
-<li>Roads within Serra da Canastra are unpaved gravel &mdash; well-maintained but dusty in dry season</li>
-<li>4WD/AWD strongly recommended for the Chapad&atilde;o crossing</li>
-<li>Last gas station before the park: S&atilde;o Jo&atilde;o Batista do Gl&oacute;ria or S&atilde;o Roque de Minas</li>
-<li>Delfin&oacute;polis area roads are paved but some waterfall access roads are dirt</li>
-<li>SP-330 (Anhanguera) for the return is a well-maintained toll highway</li>
-</ul>
-</div>
-</div>
+  <div class="container">
 
-<div class="info-block reveal">
-<h3 class="info-block__title">Accommodation</h3>
-<div class="info-block__content">
-<ul class="info-list">
-<li>Night 1: Casa Serra da Canastra &mdash; Pousada in S&atilde;o Jo&atilde;o Batista do Gl&oacute;ria, rustic-chic style with mountain views</li>
-<li>Nights 2-3: Lakeside Airbnb near Delfin&oacute;polis &mdash; Private house overlooking Furnas Reservoir with deck and BBQ area</li>
-<li>Book well in advance for July (dry season / Brazilian winter holidays)</li>
-<li>Bring warm layers &mdash; nights at altitude can drop to 8-12 degrees Celsius</li>
-</ul>
-</div>
-</div>
+    <div class="info-section reveal">
+      <h3 class="info-title">Transportation</h3>
+      <p class="info-text">The route follows BR-381 (Fernão Dias) from São Paulo to MG-050, then local roads to São João Batista do Glória. Total round trip approximately 880km. Return via SP-330 (Anhanguera) — a well-maintained toll highway.</p>
+      <ul class="info-list">
+        <li>Roads within Serra da Canastra are unpaved gravel — well-maintained but dusty in dry season</li>
+        <li>4WD/AWD strongly recommended for the Chapadão crossing</li>
+        <li>Last gas station before the park: São João Batista do Glória or São Roque de Minas</li>
+        <li>Delfinópolis area: paved main roads, but waterfall access roads are often dirt</li>
+        <li>Download offline maps — phone signal is minimal to nonexistent inside the park</li>
+      </ul>
+    </div>
 
-<div class="info-block reveal">
-<h3 class="info-block__title">Best Season</h3>
-<div class="info-block__content">
-<p>April to October (dry season) is ideal. Clear skies, mild temperatures, waterfalls flowing strong from late rainy season reserves. July offers the best combination of dry weather and full water volume. Avoid December-March when heavy rains can make park roads impassable and waterfalls dangerously strong.</p>
-</div>
-</div>
+    <div class="info-section reveal">
+      <h3 class="info-title">Accommodation</h3>
+      <ul class="info-list">
+        <li>Night 1: Casa Serra da Canastra — Pousada in São João Batista do Glória, rustic-chic with mountain views</li>
+        <li>Nights 2–3: Lakeside Airbnb in São José da Barra — private house overlooking Furnas Reservoir with deck and BBQ</li>
+        <li>Book well in advance for July (dry season coincides with Brazilian winter school holidays)</li>
+        <li>Bring warm layers — nights at altitude can drop to 8–12 degrees Celsius</li>
+      </ul>
+    </div>
 
-<div class="info-block reveal">
-<h3 class="info-block__title">Packing List</h3>
-<div class="info-block__content">
-<ul class="info-list">
-<li>Hiking boots or sturdy trail shoes (waterfall trails are slippery)</li>
-<li>Swimwear and quick-dry towel (natural pools everywhere)</li>
-<li>Sunscreen SPF50+ and wide-brim hat (plateau has no shade)</li>
-<li>Light rain jacket (morning mist can be heavy)</li>
-<li>Warm fleece for evenings (altitude cold)</li>
-<li>Binoculars for wildlife spotting</li>
-<li>Refillable water bottles (2L minimum per person for park days)</li>
-<li>Snacks and energy bars for the park crossing</li>
-<li>Cash (small towns may not accept cards everywhere)</li>
-<li>Camera with wide-angle lens for the landscapes</li>
-</ul>
-</div>
-</div>
+    <div class="info-section reveal">
+      <h3 class="info-title">Best Season</h3>
+      <p class="info-text">April to October (dry season) is ideal. Clear skies, mild temperatures, waterfalls flowing strong from late rainy season reserves. July offers the best combination of dry weather and full water volume. Avoid December–March when heavy rains make park roads impassable and waterfalls dangerously strong.</p>
+    </div>
 
-<div class="info-block reveal">
-<h3 class="info-block__title">Safety Tips</h3>
-<div class="info-block__content">
-<ul class="info-list">
-<li>Gravel roads: maintain 40-60km/h, watch for loose stones and wildlife crossing</li>
-<li>Wildlife: observe from distance, never feed or approach maned wolves or anteaters</li>
-<li>Sun protection: the plateau at 1400m has intense UV, even on cloudy days</li>
-<li>Water safety: check current strength before swimming near waterfalls</li>
-<li>Phone signal: limited to non-existent inside the park; download offline maps</li>
-<li>Park hours: gates typically open 08:00-18:00; plan accordingly</li>
-</ul>
-</div>
-</div>
+    <div class="info-section reveal">
+      <h3 class="info-title">Packing</h3>
+      <ul class="info-list">
+        <li>Hiking boots or sturdy trail shoes — waterfall trails are slippery</li>
+        <li>Swimwear and quick-dry towel — natural pools await at every turn</li>
+        <li>Sunscreen SPF50+ and wide-brim hat — the plateau offers no shade</li>
+        <li>Light rain jacket — morning mist can soak through layers</li>
+        <li>Warm fleece for evenings — altitude cold surprises</li>
+        <li>Binoculars for wildlife spotting from distance</li>
+        <li>Refillable water bottles, 2L minimum per person for park days</li>
+        <li>Snacks and energy bars for the Chapadão crossing</li>
+        <li>Cash — small towns may not accept cards universally</li>
+      </ul>
+    </div>
 
-<div class="info-block reveal">
-<h3 class="info-block__title">Vehicle: GWM H6</h3>
-<div class="info-block__content">
-<p>The GWM Haval H6 is well-suited for this trip. Key advantages for the Canastra route:</p>
-<ul class="info-list">
-<li>AWD system handles gravel roads and mild off-road sections confidently</li>
-<li>200mm ground clearance clears most obstacles on park roads</li>
-<li>Comfortable cabin for long highway stretches (420km+ per day)</li>
-<li>Large boot space for camping gear and provisions</li>
-<li>Fuel efficiency adequate for the full trip on 2-3 tanks</li>
-<li>Hill descent control useful on steep waterfall access roads</li>
-</ul>
-</div>
-</div>
+    <div class="info-section reveal">
+      <h3 class="info-title">Safety</h3>
+      <ul class="info-list">
+        <li>Gravel roads: maintain 40–60km/h, watch for loose stones and wildlife</li>
+        <li>Wildlife: observe from distance, never feed or approach maned wolves</li>
+        <li>Sun: the plateau at 1,400m has intense UV, even on overcast days</li>
+        <li>Water: check current strength before swimming near waterfalls</li>
+        <li>Park hours: gates typically open 08:00–18:00, plan entry/exit accordingly</li>
+        <li>Emergency: nearest hospital is in Passos (90km from the park)</li>
+      </ul>
+    </div>
 
-</div>
+    <div class="info-section reveal">
+      <h3 class="info-title">GWM Haval H6</h3>
+      <p class="info-text">Well-suited for this expedition. Key advantages for Canastra:</p>
+      <ul class="info-list">
+        <li>AWD system handles gravel roads and mild off-road with confidence</li>
+        <li>200mm ground clearance clears park road obstacles</li>
+        <li>Comfortable cabin for 420km+ highway stretches</li>
+        <li>Large boot space for provisions and gear</li>
+        <li>Hill descent control useful on steep waterfall access roads</li>
+        <li>Fuel efficient — the full trip fits in 2–3 tanks</li>
+      </ul>
+    </div>
+
+  </div>
 </section>
 
-<!-- FOOTER -->
+<!-- ===== FOOTER ===== -->
 <footer class="footer">
-<p class="footer__farewell">At&eacute; logo, Canastra.</p>
-<p class="footer__quote">"The road not taken led to waterfalls, cheese, and silence. We took it anyway."</p>
-<p class="footer__brand">ISLAND &middot; 2026</p>
+  <p class="footer-farewell">Até logo, Canastra.</p>
+  <p class="footer-quote">"The road not taken led to waterfalls, cheese, and silence. We took it anyway."</p>
+  <p class="footer-brand">Island · 2026</p>
 </footer>
 
 <script>
 // Tab switching
-document.querySelectorAll('.tabs__btn').forEach(btn => {
+document.querySelectorAll('.tab-btn').forEach(btn => {
   btn.addEventListener('click', () => {
-    const tabId = btn.dataset.tab;
-    const tabsContainer = btn.closest('.tabs');
-
-    tabsContainer.querySelectorAll('.tabs__btn').forEach(b => b.classList.remove('active'));
-    tabsContainer.querySelectorAll('.tabs__panel').forEach(p => p.classList.remove('active'));
-
+    const id = btn.dataset.tab;
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
     btn.classList.add('active');
-    tabsContainer.querySelector('#' + tabId).classList.add('active');
+    document.getElementById(id).classList.add('active');
   });
 });
 
 // Scroll reveal
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
-    }
-  });
-}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+}, {threshold:0.08, rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 
-document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-// Smooth scroll for welcome button
-document.querySelector('.welcome__btn').addEventListener('click', (e) => {
-  e.preventDefault();
-  document.querySelector('#overview').scrollIntoView({ behavior: 'smooth' });
+// Hero scroll button
+document.getElementById('scrollCue').addEventListener('click', () => {
+  document.getElementById('overview').scrollIntoView({behavior:'smooth'});
 });
 </script>
 </body>
